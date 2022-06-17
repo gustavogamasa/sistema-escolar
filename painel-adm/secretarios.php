@@ -31,6 +31,9 @@ require_once("../conexao.php");
                 <thead>
                     <tr>
                         <th>Nome</th>
+                        <th>Telefone</th>
+                        <th>Email</th>
+                        <th>CPF</th>
                        
                         <th>Ações</th>
                     </tr>
@@ -40,7 +43,7 @@ require_once("../conexao.php");
 
                    <?php 
 
-                   $query = $pdo->query("SELECT * FROM carac order by id desc ");
+                   $query = $pdo->query("SELECT * FROM secretarios order by id desc ");
                    $res = $query->fetchAll(PDO::FETCH_ASSOC);
 
                    for ($i=0; $i < count($res); $i++) { 
@@ -48,7 +51,10 @@ require_once("../conexao.php");
                       }
 
                       $nome = $res[$i]['nome'];
-                      
+                      $telefone = $res[$i]['telefone'];
+                      $email = $res[$i]['email'];
+                      $cpf = $res[$i]['cpf'];
+                      $endereco = $res[$i]['endereco'];
                       
                       $id = $res[$i]['id'];
 
@@ -58,11 +64,14 @@ require_once("../conexao.php");
 
                     <tr>
                         <td><?php echo $nome ?></td>
+                        <td><?php echo $telefone ?></td>
+                        <td><?php echo $email ?></td>
+                        <td><?php echo $cpf ?></td>
                        
 
                         <td>
                              <a href="index.php?pag=<?php echo $pag ?>&funcao=editar&id=<?php echo $id ?>" class='text-primary mr-1' title='Editar Dados'><i class='far fa-edit'></i></a>
-                            <a href="index.php?pag=<?php echo $pag ?>&funcao=excluir&id=<?php echo $id ?>" class='text-danger mr-1' title='Excluir Registro'><i class='far fa-trash-alt'></i></a>
+                             <a href="index.php?pag=<?php echo $pag ?>&funcao=excluir&id=<?php echo $id ?>" class='text-danger mr-1' title='Excluir Registro'><i class='far fa-trash-alt'></i></a>
                         </td>
                     </tr>
 <?php } ?>
@@ -91,10 +100,16 @@ require_once("../conexao.php");
                     $titulo = "Editar Registro";
                     $id2 = $_GET['id'];
 
-                    $query = $pdo->query("SELECT * FROM carac where id = '" . $id2 . "' ");
+                    $query = $pdo->query("SELECT * FROM secretarios where id = '" . $id2 . "' ");
                     $res = $query->fetchAll(PDO::FETCH_ASSOC);
 
-                    $nome2 = $res[0]['nome'];
+                      $nome2 = $res[0]['nome'];
+                      $telefone2 = $res[0]['telefone'];
+                      $email2 = $res[0]['email'];
+                      $cpf2 = $res[0]['cpf'];
+                      $endereco2 = $res[0]['endereco'];
+                      
+                  
                                                             
 
                 } else {
@@ -115,7 +130,23 @@ require_once("../conexao.php");
 
                     <div class="form-group">
                         <label >Nome</label>
-                        <input value="<?php echo @$nome2 ?>" type="text" class="form-control" id="nome-cat" name="nome-cat" placeholder="Nome">
+                        <input value="<?php echo @$nome2 ?>" type="text" class="form-control" id="nome" name="nome" placeholder="Nome">
+                    </div>
+                    <div class="form-group">
+                        <label >Telefone</label>
+                        <input value="<?php echo @$telefone2 ?>" type="text" class="form-control" id="telefone" name="telefone" placeholder="Telefone">
+                    </div>
+                    <div class="form-group">
+                        <label >Email</label>
+                        <input value="<?php echo @$email2 ?>" type="text" class="form-control" id="email" name="email" placeholder="Email">
+                    </div>
+                    <div class="form-group">
+                        <label >CPF</label>
+                        <input value="<?php echo @$cpf2 ?>" type="text" class="form-control" id="cpf" name="cpf" placeholder="CPF">
+                    </div>
+                    <div class="form-group">
+                        <label >Endereço</label>
+                        <input value="<?php echo @$endereco2 ?>" type="text" class="form-control" id="endereco" name="endereco" placeholder="Endereço">
                     </div>
 
                   
@@ -136,7 +167,7 @@ require_once("../conexao.php");
 
 
                 <input value="<?php echo @$_GET['id'] ?>" type="hidden" name="txtid2" id="txtid2">
-                <input value="<?php echo @$nome2 ?>" type="hidden" name="antigo" id="antigo">
+                <input value="<?php echo @$cpf ?>" type="hidden" name="antigo" id="antigo">
 
                     <button type="button" id="btn-fechar" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
                     <button type="submit" name="btn-salvar" id="btn-salvar" class="btn btn-primary">Salvar</button>
