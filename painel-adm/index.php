@@ -1,6 +1,6 @@
 <?php 
 
-    //variaveis para o menu
+    //variaveis para o menu ADMIN
     $pag = @$_GET["pag"];
     $menu1 = "secretarios";
     $menu2 = "menu2";
@@ -11,6 +11,7 @@
   
 
  ?>
+
 
 
 
