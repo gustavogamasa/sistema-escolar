@@ -191,6 +191,7 @@
                     <!-- End of Topbar -->
 
                     <!-- Begin Page Content -->
+                    
                     <div class="container-fluid">
 
                         <?php if (@$pag == null) { 

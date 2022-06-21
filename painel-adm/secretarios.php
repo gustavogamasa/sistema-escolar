@@ -121,7 +121,9 @@ require_once("../conexao.php");
                 ?>
                 
                 <h5 class="modal-title" id="exampleModalLabel"><?php echo $titulo ?></h5>
+
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
@@ -351,12 +353,14 @@ if (@$_GET["funcao"] != null && @$_GET["funcao"] == "excluir") {
 
 
 <script type="text/javascript">
+    
     $(document).ready(function () {
         $('#dataTable').dataTable({
             "ordering": false
         })
 
     });
+
 </script>
 
 
