@@ -9,13 +9,13 @@
     $menu5 = "menu5";
     $menu6 = "menu6";
   
-
  ?>
 
 
 
 
 <!DOCTYPE html>
+
 <html lang="pt-br">
 
     <head>
@@ -28,18 +28,18 @@
 
         <title>Painel Administrativo</title>
 
-        <!-- Custom fonts for this template-->
+        <!-- Custom fonts-->
         <link href="../vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
         <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
 
-        <!-- Custom styles for this template-->
+        <!-- Custom styles-->
         <link href="../css/sb-admin-2.min.css" rel="stylesheet">
         <link href="../css/style.css" rel="stylesheet">
         
         <link href="../vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
 
 
-        <!-- Bootstrap core JavaScript-->
+        <!-- Bootstrap core JS-->
         <script src="../vendor/jquery/jquery.min.js"></script>
         <script src="../vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
         
@@ -188,6 +188,7 @@
                         </ul>
 
                     </nav>
+                    
                     <!-- End of Topbar -->
 
                     <!-- Begin Page Content -->

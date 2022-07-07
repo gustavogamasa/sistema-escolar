@@ -125,6 +125,7 @@ require_once("../conexao.php");
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
 
                     <span aria-hidden="true">&times;</span>
+                    
                 </button>
             </div>
             <form id="form" method="POST">
