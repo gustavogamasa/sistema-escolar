@@ -346,6 +346,10 @@
         <!-- Page custom scripts -->
         <script src="../js/demo/datatables-demo.js"></script>
 
+        <!-- Mascaras -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.11/jquery.mask.min.js"></script>
+        <script src="../js/mascaras.js"></script>
+
     </body>
 
 </html>

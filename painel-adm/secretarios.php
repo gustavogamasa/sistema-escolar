@@ -170,10 +170,13 @@ require_once("../conexao.php");
 
 
                 <input value="<?php echo @$_GET['id'] ?>" type="hidden" name="txtid2" id="txtid2">
+                <!-- input do CPF para verificar duplicidade -->
                 <input value="<?php echo @$cpf ?>" type="hidden" name="antigo" id="antigo">
+                
 
                     <button type="button" id="btn-fechar" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
                     <button type="submit" name="btn-salvar" id="btn-salvar" class="btn btn-primary">Salvar</button>
+
                 </div>
             </form>
         </div>
