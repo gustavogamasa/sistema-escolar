@@ -2,11 +2,11 @@
 
 require_once("../../conexao.php"); 
 
-$nome = $_POST['nome_mec'];
-$telefone = $_POST['telefone_mec'];
-$cpf = $_POST['cpf_mec'];
-$email = $_POST['email_mec'];
-$endereco = $_POST['endereco_mec'];
+$nome = $_POST['nome'];
+$telefone = $_POST['telefone'];
+$cpf = $_POST['cpf'];
+$email = $_POST['email'];
+$endereco = $_POST['endereco'];
 
 $antigo = $_POST['antigo'];
 $antigo2 = $_POST['antigo2'];
@@ -29,7 +29,7 @@ if($cpf == ""){
 
 //VERIFICAR SE O REGISTRO JÁ EXISTE NO BANCO
 if($antigo != $cpf){
-	$query = $pdo->query("SELECT * FROM recepcionistas where cpf = '$cpf' ");
+	$query = $pdo->query("SELECT * FROM secretarios where cpf = '$cpf' ");
 	$res = $query->fetchAll(PDO::FETCH_ASSOC);
 	$total_reg = @count($res);
 	if($total_reg > 0){
@@ -41,7 +41,7 @@ if($antigo != $cpf){
 
 //VERIFICAR SE O REGISTRO COM MESMO EMAIL JÁ EXISTE NO BANCO
 if($antigo2 != $email){
-	$query = $pdo->query("SELECT * FROM recepcionistas where email = '$email' ");
+	$query = $pdo->query("SELECT * FROM secretarios where email = '$email' ");
 	$res = $query->fetchAll(PDO::FETCH_ASSOC);
 	$total_reg = @count($res);
 	if($total_reg > 0){
@@ -52,14 +52,14 @@ if($antigo2 != $email){
 
 
 if($id == ""){
-	$res = $pdo->prepare("INSERT INTO recepcionistas SET nome = :nome, cpf = :cpf, email = :email, endereco = :endereco, telefone = :telefone");	
+	$res = $pdo->prepare("INSERT INTO secretarios SET nome = :nome, cpf = :cpf, email = :email, endereco = :endereco, telefone = :telefone");	
 
 	$res2 = $pdo->prepare("INSERT INTO usuarios SET nome = :nome, cpf = :cpf, email = :email, senha = :senha, nivel = :nivel");	
 	$res2->bindValue(":senha", '123');
 	$res2->bindValue(":nivel", 'recep');
 
 }else{
-	$res = $pdo->prepare("UPDATE recepcionistas SET nome = :nome, cpf = :cpf, email = :email, endereco = :endereco, telefone = :telefone WHERE id = '$id'");
+	$res = $pdo->prepare("UPDATE secretarios SET nome = :nome, cpf = :cpf, email = :email, endereco = :endereco, telefone = :telefone WHERE id = '$id'");
 
 	$res2 = $pdo->prepare("UPDATE usuarios SET nome = :nome, cpf = :cpf, email = :email WHERE cpf = '$antigo'");	
 	

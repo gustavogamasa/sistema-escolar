@@ -171,7 +171,8 @@ require_once("../conexao.php");
 
                 <input value="<?php echo @$_GET['id'] ?>" type="hidden" name="txtid2" id="txtid2">
                 <!-- input do CPF para verificar duplicidade -->
-                <input value="<?php echo @$cpf ?>" type="hidden" name="antigo" id="antigo">
+                <input value="<?php echo @$cpf2 ?>" type="hidden" name="antigo" id="antigo">
+                <input value="<?php echo @$email2 ?>" type="hidden" name="antigo2" id="antigo2">
                 
 
                     <button type="button" id="btn-fechar" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
@@ -258,7 +259,7 @@ if (@$_GET["funcao"] != null && @$_GET["funcao"] == "excluir") {
 
                 $('#mensagem').removeClass()
 
-                if (mensagem.trim() == "Salvo com Sucesso!!") {
+                if (mensagem.trim() == "Salvo com Sucesso!") {
                     
                     //$('#nome').val('');
                     //$('#cpf').val('');
@@ -308,7 +309,7 @@ if (@$_GET["funcao"] != null && @$_GET["funcao"] == "excluir") {
                 dataType: "text",
                 success: function (mensagem) {
 
-                    if (mensagem.trim() === 'Excluído com Sucesso!!') {
+                    if (mensagem.trim() === 'Excluído com Sucesso!') {
 
 
                         $('#btn-cancelar-excluir').click();
