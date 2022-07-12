@@ -3,7 +3,7 @@
     //variaveis para o menu ADMIN
     $pag = @$_GET["pag"];
     $menu1 = "secretarios";
-    $menu2 = "menu2";
+    $menu2 = "professores";
     $menu3 = "menu3";
     $menu4 = "menu4";
     $menu5 = "menu5";
@@ -43,8 +43,8 @@
         <script src="../vendor/jquery/jquery.min.js"></script>
         <script src="../vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
         
-         <link rel="shortcut icon" href="../../img/favicon0.ico" type="image/x-icon">
-    <link rel="icon" href="../../img/favicon0.ico" type="image/x-icon">
+         <link rel="shortcut icon" href="../img/icon.ico" type="image/x-icon">
+    <link rel="icon" href="../img/icon.ico" type="image/x-icon">
 
     </head>
 
@@ -87,7 +87,7 @@
                             <h6 class="collapse-header">PESSOAS:</h6>
 
                             <a class="collapse-item" href="index.php?pag=<?php echo $menu1 ?>">Secretários</a>
-                            <a class="collapse-item" href="index.php?pag=<?php echo $menu2 ?>">Menu 2</a>
+                            <a class="collapse-item" href="index.php?pag=<?php echo $menu2 ?>">Professores</a>
 
                         </div>
                     </div>
