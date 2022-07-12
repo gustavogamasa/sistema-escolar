@@ -10,6 +10,8 @@
  * Copyright 2011-2019 Twitter, Inc.
  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
  */
+
+ 
 :root {
   --blue: #4e73df;
   --indigo: #6610f2;
@@ -20,7 +22,7 @@
   --yellow: #f6c23e;
   --green: #1cc88a;
   --teal: #20c9a6;
-  --cyan: #36b9cc;
+  --cyan: #3689cc;
   --white: #fff;
   --gray: #858796;
   --gray-dark: #5a5c69;
