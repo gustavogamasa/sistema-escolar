@@ -11,6 +11,15 @@ require_once("../conexao.php");
 
 } */
 
+function debug_to_console($data) {
+    $output = $data;
+    if (is_array($output))
+        $output = implode(',', $output);
+
+    echo "<script>console.log('Debug Objects: " . $output . "' );</script>";
+}
+
+
 ?>
 
 <div class="row mt-4 mb-4">
@@ -72,6 +81,7 @@ require_once("../conexao.php");
                         <td>
                              <a href="index.php?pag=<?php echo $pag ?>&funcao=editar&id=<?php echo $id ?>" class='text-primary mr-1' title='Editar Dados'><i class='far fa-edit'></i></a>
                              <a href="index.php?pag=<?php echo $pag ?>&funcao=excluir&id=<?php echo $id ?>" class='text-danger mr-1' title='Excluir Registro'><i class='far fa-trash-alt'></i></a>
+                             <a href="index.php?pag=<?php echo $pag ?>&funcao=endereco&id=<?php echo $id ?>" class='text-info mr-1' title='Ver Endereço'><i class='fas fa-home'></i></a>
                         </td>
                     </tr>
 <?php } ?>
@@ -90,7 +100,7 @@ require_once("../conexao.php");
 
 
 
-<!-- Modal -->
+<!-- Modal EDITAR -->
 <div class="modal fade" id="modalDados" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -221,7 +231,55 @@ require_once("../conexao.php");
 </div>
 
 
+<!-- MODAL PARA MOSTRAR O ENDEREÇO -->
 
+
+<div class="modal" id="modal-endereco" tabindex="-1" role="dialog">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title">Dados Secretário</h5>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="modal-body">
+
+				<?php 
+				if (@$_GET['funcao'] == 'endereco') {
+
+                  
+					
+					$id2 = $_GET['id'];
+
+					$query = $pdo->query("SELECT * FROM secretarios where id = '$id2' ");
+					$res = $query->fetchAll(PDO::FETCH_ASSOC);
+					$nome3 = $res[0]['nome'];
+					$cpf3 = $res[0]['cpf'];
+					$telefone3 = $res[0]['telefone'];
+					$email3 = $res[0]['email'];
+					$endereco3 = $res[0]['endereco'];
+
+                   
+					
+				} 
+
+              
+				?>
+
+				<span><b>Nome: </b> <i><?php echo $nome3 ?></i><br>
+				<span><b>Telefone: </b> <i><?php echo $telefone3 ?></i> <span class="ml-4"><b>CPF: </b> <i><?php echo $cpf3 ?></i><br>
+				<span><b>Email: </b> <i><?php echo $email3 ?><br>
+				<span><b>Endereço: </b> <i><?php echo $endereco3 ?><br>
+              
+
+               
+
+			</div>
+			
+		</div>
+	</div>
+</div>
 
 
 <?php 
@@ -236,6 +294,10 @@ if (@$_GET["funcao"] != null && @$_GET["funcao"] == "editar") {
 
 if (@$_GET["funcao"] != null && @$_GET["funcao"] == "excluir") {
     echo "<script>$('#modal-deletar').modal('show');</script>";
+}
+
+if (@$_GET["funcao"] != null && @$_GET["funcao"] == "endereco") {
+    echo "<script>$('#modal-endereco').modal('show');</script>"; 
 }
 
 ?>
@@ -329,6 +391,11 @@ if (@$_GET["funcao"] != null && @$_GET["funcao"] == "excluir") {
 
 
 
+
+
+
+
+
 <!--SCRIPT PARA CARREGAR IMAGEM -->
 <script type="text/javascript">
 
@@ -368,5 +435,55 @@ if (@$_GET["funcao"] != null && @$_GET["funcao"] == "excluir") {
 
 </script>
 
+
+<!-- MODAL PARA MOSTRAR O ENDEREÇO -->
+
+
+<div class="modal" id="modal-endereco" tabindex="-1" role="dialog">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title">Dados Secretário</h5>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="modal-body">
+
+				<?php 
+				if (@$_GET['funcao'] == 'endereco') {
+
+                  
+					
+					$id2 = $_GET['id'];
+
+					$query = $pdo->query("SELECT * FROM secretarios where id = '$id2' ");
+					$res = $query->fetchAll(PDO::FETCH_ASSOC);
+					$nome3 = $res[0]['nome'];
+					$cpf3 = $res[0]['cpf'];
+					$telefone3 = $res[0]['telefone'];
+					$email3 = $res[0]['email'];
+					$endereco3 = $res[0]['endereco'];
+
+                   
+					
+				} 
+
+              
+				?>
+
+				<span><b>Nome: </b> <i><?php echo $nome3 ?></i><br>
+				<span><b>Telefone: </b> <i><?php echo $telefone3 ?></i> <span class="ml-4"><b>CPF: </b> <i><?php echo $cpf3 ?></i><br>
+				<span><b>Email: </b> <i><?php echo $email3 ?><br>
+				<span><b>Endereço: </b> <i><?php echo $endereco3 ?><br>
+              
+
+               
+
+			</div>
+			
+		</div>
+	</div>
+</div>
 
 
