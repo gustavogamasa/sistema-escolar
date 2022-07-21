@@ -43,7 +43,8 @@ function debug_to_console($data) {
                         <th>Telefone</th>
                         <th>Email</th>
                         <th>CPF</th>
-                       
+                        <th>Foto</th>
+
                         <th>Ações</th>
                     </tr>
                 </thead>
@@ -63,6 +64,7 @@ function debug_to_console($data) {
                       $telefone = $res[$i]['telefone'];
                       $email = $res[$i]['email'];
                       $cpf = $res[$i]['cpf'];
+                      $foto = $res[$i]['foto'];
                       $endereco = $res[$i]['endereco'];
                       
                       $id = $res[$i]['id'];
@@ -76,6 +78,7 @@ function debug_to_console($data) {
                         <td><?php echo $telefone ?></td>
                         <td><?php echo $email ?></td>
                         <td><?php echo $cpf ?></td>
+                        <td><?php echo $foto ?></td>
                        
 
                         <td>
@@ -102,7 +105,7 @@ function debug_to_console($data) {
 
 <!-- Modal EDITAR -->
 <div class="modal fade" id="modalDados" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
+    <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header">
                 <?php 
@@ -118,6 +121,7 @@ function debug_to_console($data) {
                       $email2 = $res[0]['email'];
                       $cpf2 = $res[0]['cpf'];
                       $endereco2 = $res[0]['endereco'];
+                      $foto2 = $res[0]['foto'];
                       
                   
                                                             
@@ -141,26 +145,60 @@ function debug_to_console($data) {
             <form id="form" method="POST">
                 <div class="modal-body">
 
-                    <div class="form-group">
+                    <div class="row">
+                        <div class="col-md-6">
+                        <div class="form-group">
                         <label >Nome</label>
                         <input value="<?php echo @$nome2 ?>" type="text" class="form-control" id="nome" name="nome" placeholder="Nome">
                     </div>
-                    <div class="form-group">
+
+                    <div class = "row">
+                        <div class="col-md-6">
+                        <div class="form-group">
+                        <label >CPF</label>
+                        <input value="<?php echo @$cpf2 ?>" type="text" class="form-control" id="cpf" name="cpf" placeholder="CPF">
+                    </div>
+                        </div>
+
+                        <div class="col-md-6">
+                        <div class="form-group">
                         <label >Telefone</label>
                         <input value="<?php echo @$telefone2 ?>" type="text" class="form-control" id="telefone" name="telefone" placeholder="Telefone">
                     </div>
+                        </div>
+
+                    </div>
+
+
                     <div class="form-group">
                         <label >Email</label>
                         <input value="<?php echo @$email2 ?>" type="text" class="form-control" id="email" name="email" placeholder="Email">
                     </div>
-                    <div class="form-group">
-                        <label >CPF</label>
-                        <input value="<?php echo @$cpf2 ?>" type="text" class="form-control" id="cpf" name="cpf" placeholder="CPF">
-                    </div>
+ 
                     <div class="form-group">
                         <label >Endereço</label>
                         <input value="<?php echo @$endereco2 ?>" type="text" class="form-control" id="endereco" name="endereco" placeholder="Endereço">
                     </div>
+
+                        </div>
+
+                        <div class="col-md-6">
+
+                        <div class="form-group">
+								<label >Foto</label>
+								<input type="file" value="<?php echo @$foto2 ?>"  class="form-control-file" id="imagem" name="imagem" onChange="carregarImg();">
+							</div>
+
+							<div id="divImgConta">
+							<?php if(@$foto2 != ""){ ?>
+								<img src="../img/professores/<?php echo $foto2 ?>" width="200" height="200" id="target">
+							<?php  }else{ ?>
+								<img src="../img/professores/sem-foto.jpg" width="200" height="200" id="target">
+							<?php } ?>
+							</div>
+
+
+
 
                   
                    
