@@ -72,14 +72,21 @@ if($antigo2 != $email){
 
 
 if($id == ""){
-	$res = $pdo->prepare("INSERT INTO professores SET nome = :nome, cpf = :cpf, email = :email, endereco = :endereco, telefone = :telefone, foto = '$foto'");	
+	$res = $pdo->prepare("INSERT INTO professores SET nome = :nome, cpf = :cpf, email = :email, endereco = :endereco, telefone = :telefone, foto = '$imagem'");	
 
 	$res2 = $pdo->prepare("INSERT INTO usuarios SET nome = :nome, cpf = :cpf, email = :email, senha = :senha, nivel = :nivel");	
 	$res2->bindValue(":senha", '123');
 	$res2->bindValue(":nivel", 'professor');
 
 }else{
-	$res = $pdo->prepare("UPDATE professores SET nome = :nome, cpf = :cpf, email = :email, endereco = :endereco, telefone = :telefone WHERE id = '$id'");
+	if($imagem == 'sem-foto.jpg'){
+
+		$res = $pdo->prepare("UPDATE professores SET nome = :nome, cpf = :cpf, email = :email, endereco = :endereco, telefone = :telefone WHERE id = '$id'");
+
+	} else {
+		$res = $pdo->prepare("UPDATE professores SET nome = :nome, cpf = :cpf, email = :email, endereco = :endereco, telefone = :telefone, foto = '$imagem' WHERE id = '$id'");
+
+	}
 
 	$res2 = $pdo->prepare("UPDATE usuarios SET nome = :nome, cpf = :cpf, email = :email WHERE cpf = '$antigo'");	
 	
