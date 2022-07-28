@@ -5,22 +5,10 @@ require_once("conexao.php");
 $query = $pdo->query("SELECT * FROM usuarios where nivel = 'admin'");
 $res = $query->fetchAll(PDO::FETCH_ASSOC);
 $total_reg = @count($res);
+$email_adm = 'gustavo@sistemaeduque.com.br';
+
 if($total_reg == 0){
 	$res = $pdo->query("INSERT INTO usuarios SET nome = 'Administrador', cpf = '000.000.000-00', email = '$email_adm', senha = '123', nivel = 'admin'");	
-}
-
-//EXCLUIR ORÇAMENTO APÓS XX DIAS
-$data_hoje = date('Y-m-d');
-$data_15 = date('Y-m-d', strtotime("-$excluir_orcamento_dias days",strtotime($data_hoje)));
-
-
-$query = $pdo->query("SELECT * FROM orcamentos where data <= '$data_15'");
-$res = $query->fetchAll(PDO::FETCH_ASSOC);
-for ($i=0; $i < @count($res); $i++) { 
-		foreach ($res[$i] as $key => $value) {
-}
-$id_orc = $res[$i]['id'];
-$pdo->query("DELETE FROM orcamentos where id = '$id_orc'");
 }
 
 ?>
