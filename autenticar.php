@@ -25,12 +25,12 @@ if($total_reg > 0){
 		echo "<script language='javascript'> window.location='painel-adm' </script>";
 	}
 
-	if($nivel == 'mecanico'){
-		echo "<script language='javascript'> window.location='painel-mecanico' </script>";
+	if($nivel == 'professor'){
+		echo "<script language='javascript'> window.location='painel-professor' </script>";
 	}
 
-	if($nivel == 'recep'){
-		echo "<script language='javascript'> window.location='painel-recepcao' </script>";
+	if($nivel == 'secretaria'){
+		echo "<script language='javascript'> window.location='painel-secretaria' </script>";
 	}
 	
 }else{

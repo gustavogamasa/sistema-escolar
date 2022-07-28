@@ -1,4 +1,6 @@
 <?php 
+    @session_start();
+    require_once("../conexao.php");
 
     //variaveis para o menu ADMIN
     $pag = @$_GET["pag"];
@@ -8,6 +10,14 @@
     $menu4 = "menu4";
     $menu5 = "menu5";
     $menu6 = "menu6";
+
+    //recuperar dados do usuário
+
+    $query = $pdo->query("SELECT * FROM usuarios where id = '$_SESSION[id_usuario]'");
+    $res = $query->fetchAll(PDO::FETCH_ASSOC);
+    $nome_usu = @$res[0]['nome'];
+    $cpf_usu = @$res[0]['cpf'];
+    $email_usu = @$res[0]['email'];
   
  ?>
 
@@ -166,7 +176,7 @@
                             <!-- Nav Item - User Information -->
                             <li class="nav-item dropdown no-arrow">
                                 <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    <span class="mr-2 d-none d-lg-inline text-gray-600 small">Nome do usuario</span>
+                                    <span class="mr-2 d-none d-lg-inline text-gray-600 small"><?php echo $nome_usu ?></span>
                                     <img class="img-profile rounded-circle" src="../img/sem-foto.jpg">
 
                                 </a>

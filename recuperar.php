@@ -15,7 +15,7 @@ if(@count($dados) > 0){
 
    //ENVIAR O EMAIL COM A SENHA
     $destinatario = $email;
-    $assunto = utf8_decode($nome_oficina . ' - Recuperação de Senha');;
+    $assunto = utf8_decode($nome_escola . ' - Recuperação de Senha');;
     $mensagem = utf8_decode('Sua senha é ' .$senha);
     $cabecalhos = "From: ".$email_adm;
     @mail($destinatario, $assunto, $mensagem, $cabecalhos);
