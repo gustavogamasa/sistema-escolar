@@ -53,7 +53,7 @@ function debug_to_console($data)
 
                     <?php
 
-                    $query = $pdo->query("SELECT * FROM funcioinarios order by id desc ");
+                    $query = $pdo->query("SELECT * FROM funcionarios order by id desc ");
                     $res = $query->fetchAll(PDO::FETCH_ASSOC);
 
                     for ($i = 0; $i < count($res); $i++) {
