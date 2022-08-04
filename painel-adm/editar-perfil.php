@@ -1,16 +1,13 @@
 <?php 
+require_once("../conexao.php"); 
 
-require_once("../../conexao.php"); 
+$nome = $_POST['nome_usu'];
+$cpf = $_POST['cpf_usu'];
+$email = $_POST['email_usu'];
+$senha = $_POST['senha_usu'];
 
-$nome = $_POST['nome'];
-$telefone = $_POST['telefone'];
-$cpf = $_POST['cpf'];
-$email = $_POST['email'];
-$endereco = $_POST['endereco'];
-
-$antigo = $_POST['antigo'];
-$antigo2 = $_POST['antigo2'];
-$id = $_POST['txtid2'];
+$antigo = $_POST['antigo_usu'];
+$id = $_POST['id_usu'];
 
 if($nome == ""){
 	echo 'O nome é Obrigatório!';
@@ -27,9 +24,10 @@ if($cpf == ""){
 	exit();
 }
 
+
 //VERIFICAR SE O REGISTRO JÁ EXISTE NO BANCO
 if($antigo != $cpf){
-	$query = $pdo->query("SELECT * FROM secretarios where cpf = '$cpf' ");
+	$query = $pdo->query("SELECT * FROM usuarios where cpf = '$cpf' ");
 	$res = $query->fetchAll(PDO::FETCH_ASSOC);
 	$total_reg = @count($res);
 	if($total_reg > 0){
@@ -39,44 +37,11 @@ if($antigo != $cpf){
 }
 
 
-//VERIFICAR SE O REGISTRO COM MESMO EMAIL JÁ EXISTE NO BANCO
-if($antigo2 != $email){
-	$query = $pdo->query("SELECT * FROM secretarios where email = '$email' ");
-	$res = $query->fetchAll(PDO::FETCH_ASSOC);
-	$total_reg = @count($res);
-	if($total_reg > 0){
-		echo 'O Email já está Cadastrado!';
-		exit();
-	}
-}
-
-
-if($id == ""){
-	$res = $pdo->prepare("INSERT INTO secretarios SET nome = :nome, cpf = :cpf, email = :email, endereco = :endereco, telefone = :telefone");	
-
-	$res2 = $pdo->prepare("INSERT INTO usuarios SET nome = :nome, cpf = :cpf, email = :email, senha = :senha, nivel = :nivel");	
-	$res2->bindValue(":senha", '123');
-	$res2->bindValue(":nivel", 'secretaria');
-
-}else{
-	$res = $pdo->prepare("UPDATE secretarios SET nome = :nome, cpf = :cpf, email = :email, endereco = :endereco, telefone = :telefone WHERE id = '$id'");
-
-	$res2 = $pdo->prepare("UPDATE usuarios SET nome = :nome, cpf = :cpf, email = :email WHERE cpf = '$antigo'");	
-	
-}
-
-$res->bindValue(":nome", $nome);
-$res->bindValue(":cpf", $cpf);
-$res->bindValue(":telefone", $telefone);
-$res->bindValue(":email", $email);
-$res->bindValue(":endereco", $endereco);
-
+$res2 = $pdo->prepare("UPDATE usuarios SET nome = :nome, cpf = :cpf, email = :email, senha = :senha WHERE id = '$id'");	
 $res2->bindValue(":nome", $nome);
 $res2->bindValue(":cpf", $cpf);
 $res2->bindValue(":email", $email);
-
-
-$res->execute();
+$res2->bindValue(":senha", $senha);
 $res2->execute();
 
 echo 'Salvo com Sucesso!';
