@@ -6,8 +6,8 @@
     $pag = @$_GET["pag"];
     $menu1 = "secretarios";
     $menu2 = "professores";
-    $menu3 = "menu3";
-    $menu4 = "menu4";
+    $menu3 = "tesoureiros";
+    $menu4 = "funcionarios";
     $menu5 = "menu5";
     $menu6 = "menu6";
 
@@ -99,6 +99,8 @@
 
                             <a class="collapse-item" href="index.php?pag=<?php echo $menu1 ?>">Secretários</a>
                             <a class="collapse-item" href="index.php?pag=<?php echo $menu2 ?>">Professores</a>
+                            <a class="collapse-item" href="index.php?pag=<?php echo $menu3 ?>">Tesoureiros</a>
+                            <a class="collapse-item" href="index.php?pag=<?php echo $menu4 ?>">Funcionários</a>
 
                         </div>
                     </div>
