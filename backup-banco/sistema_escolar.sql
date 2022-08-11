@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Aug 04, 2022 at 11:59 PM
+-- Generation Time: Aug 11, 2022 at 06:11 AM
 -- Server version: 10.4.17-MariaDB
 -- PHP Version: 7.2.34
 
@@ -24,6 +24,25 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `disciplinas`
+--
+
+CREATE TABLE `disciplinas` (
+  `id` int(11) NOT NULL,
+  `nome` varchar(50) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `disciplinas`
+--
+
+INSERT INTO `disciplinas` (`id`, `nome`) VALUES
+(5, 'Disciplina 1'),
+(6, 'Disciplina 2');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `funcionarios`
 --
 
@@ -36,6 +55,13 @@ CREATE TABLE `funcionarios` (
   `email` varchar(50) NOT NULL,
   `cargo` varchar(30) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `funcionarios`
+--
+
+INSERT INTO `funcionarios` (`id`, `nome`, `cpf`, `telefone`, `endereco`, `email`, `cargo`) VALUES
+(1, 'Funcionario 1', '131.111.111-11', '(11) 11111-1111', 'Endereço 1', 'func1@email.com', 'Cargo 1');
 
 -- --------------------------------------------------------
 
@@ -61,6 +87,27 @@ INSERT INTO `professores` (`id`, `nome`, `cpf`, `telefone`, `email`, `endereco`,
 (1, 'Professor 1', '111.111.111-11', '(11) 11111-1111', 'professor1@email.com', 'Endereço 2', 'jimmy.jpeg'),
 (12, 'Professor 2', '222.222.222-22', '(22) 22222-2222', '2@email.com', 'Endereço 2', 'IMG_4654.jpg'),
 (13, 'Professor 3', '333.333.333-33', '(33) 33333-3333', '3@email.com', 'Endereço 3', 'sem-foto.jpg');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `salas`
+--
+
+CREATE TABLE `salas` (
+  `id` int(11) NOT NULL,
+  `sala` varchar(50) NOT NULL,
+  `descricao` varchar(100) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `salas`
+--
+
+INSERT INTO `salas` (`id`, `sala`, `descricao`) VALUES
+(1, 'Sala 2', 'É uma turma bem legal'),
+(2, 'Sala 1', 'Sem descrição'),
+(6, 'Sala 3', 'Nova descricao');
 
 -- --------------------------------------------------------
 
@@ -130,13 +177,19 @@ INSERT INTO `usuarios` (`id`, `nome`, `cpf`, `email`, `senha`, `nivel`) VALUES
 (11, 'Professor 1', '111.111.111-11', 'professor1@email.com', '123', 'professor'),
 (22, 'Professor 2', '222.222.222-22', '2@email.com', '123', 'professor'),
 (23, 'Professor 3', '333.333.333-33', '3@email.com', '123', 'professor'),
-(24, 'Administrador', '000.000.000-00', 'admin@admin.com', 'admin', 'admin'),
-(25, 'Secretario 1', '211.111.111-11', 'secretario1@email.com', '123', 'secretaria'),
+(24, 'Administrador', '000.000.000-00', 'admin', 'admin', 'admin'),
+(25, 'Secretario 1', '211.111.111-11', 'secretario', 'secretario', 'secretaria'),
 (26, 'Tesoureiro 1', '133.333.333-33', 'tesoureiro1@email.com', '123', 'tesouraria');
 
 --
 -- Indexes for dumped tables
 --
+
+--
+-- Indexes for table `disciplinas`
+--
+ALTER TABLE `disciplinas`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `funcionarios`
@@ -148,6 +201,12 @@ ALTER TABLE `funcionarios`
 -- Indexes for table `professores`
 --
 ALTER TABLE `professores`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `salas`
+--
+ALTER TABLE `salas`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -173,16 +232,28 @@ ALTER TABLE `usuarios`
 --
 
 --
+-- AUTO_INCREMENT for table `disciplinas`
+--
+ALTER TABLE `disciplinas`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+
+--
 -- AUTO_INCREMENT for table `funcionarios`
 --
 ALTER TABLE `funcionarios`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `professores`
 --
 ALTER TABLE `professores`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+
+--
+-- AUTO_INCREMENT for table `salas`
+--
+ALTER TABLE `salas`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `secretarios`
