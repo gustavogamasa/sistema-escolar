@@ -28,7 +28,7 @@ if ($antigo != $nome) {
 if ($id == "") {
 	$res = $pdo->prepare("INSERT INTO turmas SET turma = :nome, descricao = :descricao");
 } else {
-	$res = $pdo->prepare("UPDATE turmas SET nome = :nome, descricao = :descricao WHERE id = '$id'");
+	$res = $pdo->prepare("UPDATE turmas SET turma = :nome, descricao = :descricao WHERE id = '$id'");
 }
 
 $res->bindValue(":nome", $nome);

@@ -1,6 +1,6 @@
 <?php
 
-$pag = "disciplinas";
+$pag = "turmas";
 
 require_once("../conexao.php");
 @session_start();
@@ -24,7 +24,7 @@ function debug_to_console($data)
 
 <div class="row mt-4 mb-4">
 
-    <a type="button" class="btn-info btn-sm ml-3 d-none d-md-block" href="index.php?pag=<?php echo $pag ?>&funcao=novo">Nova disciplina</a>
+    <a type="button" class="btn-info btn-sm ml-3 d-none d-md-block" href="index.php?pag=<?php echo $pag ?>&funcao=novo">Nova turma</a>
     <a type="button" class="btn-primary btn-sm ml-3 d-block d-sm-none" href="index.php?pag=<?php echo $pag ?>&funcao=novo">+</a>
 
 </div>
@@ -39,7 +39,8 @@ function debug_to_console($data)
             <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                 <thead>
                     <tr>
-                        <th>Nome</th>
+                        <th>Turma</th>
+                        <th>Descrição</th>
 
                         <th>Ações</th>
                     </tr>
@@ -49,14 +50,15 @@ function debug_to_console($data)
 
                     <?php
 
-                    $query = $pdo->query("SELECT * FROM disciplinas order by id desc ");
+                    $query = $pdo->query("SELECT * FROM turmas order by id desc ");
                     $res = $query->fetchAll(PDO::FETCH_ASSOC);
 
                     for ($i = 0; $i < count($res); $i++) {
                         foreach ($res[$i] as $key => $value) {
                         }
 
-                        $nome = $res[$i]['nome'];
+                        $nome = $res[$i]['turma'];
+                        $descricao = $res[$i]['descricao'];
 
                         $id = $res[$i]['id'];
 
@@ -66,6 +68,7 @@ function debug_to_console($data)
 
                         <tr>
                             <td><?php echo $nome ?></td>
+                            <td><?php echo $descricao ?></td>
 
 
                             <td>
@@ -99,10 +102,11 @@ function debug_to_console($data)
                     $titulo = "Editar Registro";
                     $id2 = $_GET['id'];
 
-                    $query = $pdo->query("SELECT * FROM disciplinas where id = '" . $id2 . "' ");
+                    $query = $pdo->query("SELECT * FROM turmas where id = '" . $id2 . "' ");
                     $res = $query->fetchAll(PDO::FETCH_ASSOC);
 
-                    $nome2 = $res[0]['nome'];
+                    $nome2 = $res[0]['turma'];
+                    $descricao2 = $res[0]['descricao'];
 
                 } else {
                     $titulo = "Inserir Registro";
@@ -126,6 +130,10 @@ function debug_to_console($data)
                         <label>Nome</label>
                         <input value="<?php echo @$nome2 ?>" type="text" class="form-control" id="nome" name="nome" placeholder="Nome">
                     </div>
+                    <div class="form-group">
+                        <label>Descrição</label>
+                        <input value="<?php echo @$descricao2 ?>" type="text" class="form-control" id="descricao" name="descricao" placeholder="Descrição">
+                    </div>
 
 
                     <small>
@@ -145,7 +153,7 @@ function debug_to_console($data)
                     <input value="<?php echo @$_GET['id'] ?>" type="hidden" name="txtid2" id="txtid2">
 
                     <!-- input do CPF para verificar duplicidade -->
-                    <input value="<?php echo @$nome22 ?>" type="hidden" name="antigo" id="antigo">
+                    <input value="<?php echo @$nome2 ?>" type="hidden" name="antigo" id="antigo">
                    
 
 
@@ -234,8 +242,6 @@ if (@$_GET["funcao"] != null && @$_GET["funcao"] == "excluir") {
 
                 if (mensagem.trim() == "Salvo com Sucesso!") {
 
-                    //$('#nome').val('');
-                    //$('#cpf').val('');
                     $('#btn-fechar').click();
                     window.location = "index.php?pag=" + pag;
 
@@ -268,66 +274,46 @@ if (@$_GET["funcao"] != null && @$_GET["funcao"] == "excluir") {
 
 
 
-<!--AJAX PARA EXCLUSÃO DOS DADOS -->
-<script type="text/javascript">
-    $(document).ready(function() {
-        var pag = "<?= $pag ?>";
-        $('#btn-deletar').click(function(event) {
-            event.preventDefault();
 
-            $.ajax({
-                url: pag + "/excluir.php",
-                method: "post",
-                data: $('form').serialize(),
-                dataType: "text",
-                success: function(mensagem) {
+                <!--AJAX PARA EXCLUSÃO DOS DADOS -->
+                <script type="text/javascript">
+                    $(document).ready(function () {
+                        var pag = "<?=$pag?>";
+                        $('#btn-deletar').click(function (event) {
+                            event.preventDefault();
 
-                    if (mensagem.trim() === 'Excluído com Sucesso!') {
+                            $.ajax({
+                                url: pag + "/excluir.php",
+                                method: "post",
+                                data: $('form').serialize(),
+                                dataType: "text",
+                                success: function (mensagem) {
 
-
-                        $('#btn-cancelar-excluir').click();
-                        window.location = "index.php?pag=" + pag;
-                    }
-
-                    $('#mensagem_excluir').text(mensagem)
+                                    if (mensagem.trim() === 'Excluído com Sucesso!') {
 
 
+                                        $('#btn-cancelar-excluir').click();
+                                        window.location = "index.php?pag=" + pag;
+                                    }
 
-                },
-
-            })
-        })
-    })
-</script>
+                                    $('#mensagem_excluir').text(mensagem)
 
 
 
+                                },
+
+                            })
+                        })
+                    })
+                </script>
 
 
 
 
 
-<!--SCRIPT PARA CARREGAR IMAGEM -->
-<script type="text/javascript">
-    function carregarImg() {
-
-        var target = document.getElementById('target');
-        var file = document.querySelector("input[type=file]").files[0];
-        var reader = new FileReader();
-
-        reader.onloadend = function() {
-            target.src = reader.result;
-        };
-
-        if (file) {
-            reader.readAsDataURL(file);
 
 
-        } else {
-            target.src = "";
-        }
-    }
-</script>
+
 
 
 
