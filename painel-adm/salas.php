@@ -1,6 +1,6 @@
 <?php
 
-$pag = "turmas";
+$pag = "salas";
 
 require_once("../conexao.php");
 @session_start();
@@ -24,7 +24,7 @@ function debug_to_console($data)
 
 <div class="row mt-4 mb-4">
 
-    <a type="button" class="btn-info btn-sm ml-3 d-none d-md-block" href="index.php?pag=<?php echo $pag ?>&funcao=novo">Nova turma</a>
+    <a type="button" class="btn-info btn-sm ml-3 d-none d-md-block" href="index.php?pag=<?php echo $pag ?>&funcao=novo">Nova sala</a>
     <a type="button" class="btn-primary btn-sm ml-3 d-block d-sm-none" href="index.php?pag=<?php echo $pag ?>&funcao=novo">+</a>
 
 </div>
@@ -39,7 +39,7 @@ function debug_to_console($data)
             <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                 <thead>
                     <tr>
-                        <th>Turma</th>
+                        <th>Sala</th>
                         <th>Descrição</th>
 
                         <th>Ações</th>
@@ -50,14 +50,14 @@ function debug_to_console($data)
 
                     <?php
 
-                    $query = $pdo->query("SELECT * FROM turmas order by id desc ");
+                    $query = $pdo->query("SELECT * FROM salas order by id desc ");
                     $res = $query->fetchAll(PDO::FETCH_ASSOC);
 
                     for ($i = 0; $i < count($res); $i++) {
                         foreach ($res[$i] as $key => $value) {
                         }
 
-                        $nome = $res[$i]['turma'];
+                        $nome = $res[$i]['sala'];
                         $descricao = $res[$i]['descricao'];
 
                         $id = $res[$i]['id'];
@@ -102,10 +102,10 @@ function debug_to_console($data)
                     $titulo = "Editar Registro";
                     $id2 = $_GET['id'];
 
-                    $query = $pdo->query("SELECT * FROM turmas where id = '" . $id2 . "' ");
+                    $query = $pdo->query("SELECT * FROM salas where id = '" . $id2 . "' ");
                     $res = $query->fetchAll(PDO::FETCH_ASSOC);
 
-                    $nome2 = $res[0]['turma'];
+                    $nome2 = $res[0]['sala'];
                     $descricao2 = $res[0]['descricao'];
 
                 } else {
@@ -127,8 +127,8 @@ function debug_to_console($data)
                 <div class="modal-body">
 
                     <div class="form-group">
-                        <label>Nome</label>
-                        <input value="<?php echo @$nome2 ?>" type="text" class="form-control" id="nome" name="nome" placeholder="Nome">
+                        <label>Sala</label>
+                        <input value="<?php echo @$nome2 ?>" type="text" class="form-control" id="nome" name="nome" placeholder="Sala">
                     </div>
                     <div class="form-group">
                         <label>Descrição</label>

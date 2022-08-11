@@ -9,7 +9,8 @@
     $menu3 = "tesoureiros";
     $menu4 = "funcionarios";
     $menu5 = "disciplinas";
-    $menu6 = "turmas";
+    $menu6 = "salas";
+    $menu7 = "turmas";
 
     //recuperar dados do usuário
 
@@ -116,8 +117,8 @@
                         <div class="bg-white py-2 collapse-inner rounded">
 
                             <a class="collapse-item" href="index.php?pag=<?php echo $menu5 ?>">Disciplinas</a>
-                            <a class="collapse-item" href="index.php?pag=<?php echo $menu6 ?>">Turmas</a>
-                            <a class="collapse-item" href="index.php?pag=<?php echo $menu5 ?>">Menu 5</a>
+                            <a class="collapse-item" href="index.php?pag=<?php echo $menu6 ?>">Salas</a>
+                            <a class="collapse-item" href="index.php?pag=<?php echo $menu5 ?>">Turmas</a>
 
                         </div>
                     </div>
