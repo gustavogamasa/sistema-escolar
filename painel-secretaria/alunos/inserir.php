@@ -7,6 +7,9 @@ $telefone = $_POST['telefone'];
 $cpf = $_POST['cpf'];
 $email = $_POST['email'];
 $endereco = $_POST['endereco'];
+$sexo = $_POST['sexo'];
+$data_nasc = $_POST['data_nasc'];
+$responsavel = $POST['responsavel'];
 
 $antigo = $_POST['antigo'];
 $antigo2 = $_POST['antigo2'];
@@ -29,7 +32,7 @@ if($cpf == ""){
 
 //VERIFICAR SE O REGISTRO JÁ EXISTE NO BANCO
 if($antigo != $cpf){
-	$query = $pdo->query("SELECT * FROM professores where cpf = '$cpf' ");
+	$query = $pdo->query("SELECT * FROM alunos where cpf = '$cpf' ");
 	$res = $query->fetchAll(PDO::FETCH_ASSOC);
 	$total_reg = @count($res);
 	if($total_reg > 0){
@@ -41,7 +44,7 @@ if($antigo != $cpf){
 
 //SCRIPT PARA SUBIR FOTO NO BANCO
 $nome_img = preg_replace('/[ -]+/' , '-' , @$_FILES['imagem']['name']);
-$caminho = '../../img/professores/' .$nome_img;
+$caminho = '../../img/alunos/' .$nome_img;
 if (@$_FILES['imagem']['name'] == ""){
   $imagem = "sem-foto.jpg";
 }else{
@@ -61,7 +64,7 @@ move_uploaded_file($imagem_temp, $caminho);
 
 //VERIFICAR SE O REGISTRO COM MESMO EMAIL JÁ EXISTE NO BANCO
 if($antigo2 != $email){
-	$query = $pdo->query("SELECT * FROM professores where email = '$email' ");
+	$query = $pdo->query("SELECT * FROM alunos where email = '$email' ");
 	$res = $query->fetchAll(PDO::FETCH_ASSOC);
 	$total_reg = @count($res);
 	if($total_reg > 0){
@@ -72,19 +75,19 @@ if($antigo2 != $email){
 
 
 if($id == ""){
-	$res = $pdo->prepare("INSERT INTO professores SET nome = :nome, cpf = :cpf, email = :email, endereco = :endereco, telefone = :telefone, foto = '$imagem'");	
+	$res = $pdo->prepare("INSERT INTO alunos SET nome = :nome, cpf = :cpf, email = :email, endereco = :endereco, telefone = :telefone, foto = '$imagem', sexo = :sexo, data_nascimento = :data_nascimento, responsavel = :responsavel, data_cadastro = curDate()");	
 
 	$res2 = $pdo->prepare("INSERT INTO usuarios SET nome = :nome, cpf = :cpf, email = :email, senha = :senha, nivel = :nivel");	
 	$res2->bindValue(":senha", '123');
-	$res2->bindValue(":nivel", 'professor');
+	$res2->bindValue(":nivel", 'aluno');
 
 }else{
 	if($imagem == 'sem-foto.jpg'){
 
-		$res = $pdo->prepare("UPDATE professores SET nome = :nome, cpf = :cpf, email = :email, endereco = :endereco, telefone = :telefone WHERE id = '$id'");
+		$res = $pdo->prepare("UPDATE alunos SET nome = :nome, cpf = :cpf, email = :email, endereco = :endereco, telefone = :telefone, sexo = :sexo, data_nascimento = :data_nascimento, responsavel = :responsavel WHERE id = '$id'");
 
 	} else {
-		$res = $pdo->prepare("UPDATE professores SET nome = :nome, cpf = :cpf, email = :email, endereco = :endereco, telefone = :telefone, foto = '$imagem' WHERE id = '$id'");
+		$res = $pdo->prepare("UPDATE alunos SET nome = :nome, cpf = :cpf, email = :email, endereco = :endereco, telefone = :telefone, foto = '$imagem' , sexo = :sexo, data_nascimento = :data_nascimento, responsavel = :responsavel WHERE id = '$id'");
 
 	}
 
@@ -97,6 +100,10 @@ $res->bindValue(":cpf", $cpf);
 $res->bindValue(":telefone", $telefone);
 $res->bindValue(":email", $email);
 $res->bindValue(":endereco", $endereco);
+$res->bindValue(":sexo", $sexo);
+$res->bindValue(":data_nascimento", $data_nasc);
+$res->bindValue(":responsavel", $responsavel);
+
 
 $res2->bindValue(":nome", $nome);
 $res2->bindValue(":cpf", $cpf);

@@ -110,6 +110,8 @@ if (@$_SESSION['id_usuario'] == null || @$_SESSION['nivel_usuario'] != 'secretar
                     $cpf2 = $res[0]['cpf'];
                     $foto2 = $res[0]['foto'];
                     $data_nasc2 = $res[0]['data_nascimento'];
+                    $sexo2 = $res[0]['sexo'];
+                    $responsavel2 = $res[0]['responsavel'];
 
 
                 } else {
@@ -128,12 +130,17 @@ if (@$_SESSION['id_usuario'] == null || @$_SESSION['nivel_usuario'] != 'secretar
             <form id="form" method="POST">
                 <div class="modal-body">
                     <div class="row">
-                        <div class="col-md-7">
+                        <div class="col-md-8">
 
                             <div class="form-group">
                                 <label>Nome</label>
                                 <input value="<?php echo @$nome2 ?>" type="text" class="form-control" id="nome" name="nome" placeholder="Nome">
                             </div>
+
+
+
+
+
 
                             <div class="row">
                                 <div class="col-md-6">
@@ -171,12 +178,22 @@ if (@$_SESSION['id_usuario'] == null || @$_SESSION['nivel_usuario'] != 'secretar
                                         <label>Data de Nascimento</label>
                                         <input value="<?php echo @$data_nasc2 ?>" type="date" class="form-control" id="cpf" name="data_nasc" placeholder="Data de nascimento">
                                     </div>
+
+                                    <div class="form-group">
+                                        <label>Sexo</label>
+                                        <select name="sexo" class="form-control" id="sexo">
+									<option <?php if(@$sexo2 == 'M'){ ?> selected <?php } ?> value="M">M</option>
+									<option <?php if(@$sexo2 == 'F'){ ?> selected <?php } ?> value="F">F</option>
+									
+								</select>
+                                    </div>
+
                                 </div>
 
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label>CPF</label>
-                                        <input value="<?php echo @$cpf_responsavel2 ?>" type="text" class="form-control" id="responsavel" name="responsavel" placeholder="CPF do Responsável">
+                                        <label>CPF do Responsável</label>
+                                        <input value="<?php echo @$responsavel2 ?>" type="text" class="form-control" id="responsavel" name="responsavel" placeholder="CPF do Responsável">
                                     </div>
                                 </div>
                             </div>
@@ -188,7 +205,7 @@ if (@$_SESSION['id_usuario'] == null || @$_SESSION['nivel_usuario'] != 'secretar
 
 
 
-                        <div class="col-md-5">
+                        <div class="col-md-4">
                             <div class="form-group">
                                 <label>Imagem</label>
                                 <input type="file" value="<?php echo @$foto2 ?>" class="form-control-file" id="imagem" name="imagem" onChange="carregarImg();">
@@ -196,9 +213,9 @@ if (@$_SESSION['id_usuario'] == null || @$_SESSION['nivel_usuario'] != 'secretar
 
                             <div id="divImgConta">
                                 <?php if (@$foto2 != "") { ?>
-                                    <img src="../img/alunos/<?php echo $foto2 ?>" width="200" height="200" id="target">
+                                    <img src="../img/alunos/ <?php echo $foto2 ?>" width="200" height="200" id="target">
                                 <?php  } else { ?>
-                                    <img src="../img/alunos/sem-foto.jpg" width="200" height="200" id="target">
+                                    <img src="../img/alunos/sem-foto.jpg " width="200" height="200" id="target">
                                 <?php } ?>
                             </div>
                         </div>
