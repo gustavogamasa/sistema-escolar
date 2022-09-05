@@ -4,8 +4,8 @@
 
     //variaveis para o menu ADMIN
     $pag = @$_GET["pag"];
-    $menu1 = "secretarios";
-    $menu2 = "professores";
+    $menu1 = "alunos";
+    $menu2 = "responsaveis";
     $menu3 = "tesoureiros";
     $menu4 = "funcionarios";
     $menu5 = "disciplinas";
@@ -98,10 +98,9 @@
                         <div class="bg-white py-2 collapse-inner rounded">
                             <h6 class="collapse-header">PESSOAS:</h6>
 
-                            <a class="collapse-item" href="index.php?pag=<?php echo $menu1 ?>">Secretários</a>
-                            <a class="collapse-item" href="index.php?pag=<?php echo $menu2 ?>">Professores</a>
-                            <a class="collapse-item" href="index.php?pag=<?php echo $menu3 ?>">Tesoureiros</a>
-                            <a class="collapse-item" href="index.php?pag=<?php echo $menu4 ?>">Funcionários</a>
+                            <a class="collapse-item" href="index.php?pag=<?php echo $menu1 ?>">Alunos</a>
+                            <a class="collapse-item" href="index.php?pag=<?php echo $menu2 ?>">Responsáveis</a>
+
 
                         </div>
                     </div>
