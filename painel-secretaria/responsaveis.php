@@ -6,7 +6,7 @@ require_once("../conexao.php");
 @session_start();
 
     //verificar se o usuário está autenticado
-if(@$_SESSION['id_usuario'] == null || @$_SESSION['nivel_usuario'] != 'admin'){
+if(@$_SESSION['id_usuario'] == null || @$_SESSION['nivel_usuario'] != 'secretaria'){
     echo "<script language='javascript'> window.location='../index.php' </script>";
 
 }
@@ -238,7 +238,7 @@ function debug_to_console($data) {
 	<div class="modal-dialog" role="document">
 		<div class="modal-content">
 			<div class="modal-header">
-				<h5 class="modal-title">Dados Tesoureiro</h5>
+				<h5 class="modal-title">Dados do responsável</h5>
 				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 					<span aria-hidden="true">&times;</span>
 				</button>

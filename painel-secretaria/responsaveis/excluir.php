@@ -4,7 +4,7 @@ require_once("../../conexao.php");
 
 $id = $_POST['id'];
 
-$query = $pdo->query("SELECT * FROM tesoureiros where id = '$id' ");
+$query = $pdo->query("SELECT * FROM responsaveis where id = '$id' ");
 $res = $query->fetchAll(PDO::FETCH_ASSOC);
 $cpf_usu = $res[0]['cpf'];
 
@@ -13,8 +13,8 @@ $res_id = $query_id->fetchAll(PDO::FETCH_ASSOC);
 $id_usu = $res_id[0]['id'];
 
 
-$pdo->query("DELETE FROM tesoureiros WHERE id = '$id'");
-$pdo->query("DELETE FROM usuarios WHERE id = '$id_usu'");
+$pdo->query("DELETE FROM responsaveis WHERE id = '$id'");
+// $pdo->query("DELETE FROM usuarios WHERE id = '$id_usu'");
 
 echo 'Excluído com Sucesso!';
 
