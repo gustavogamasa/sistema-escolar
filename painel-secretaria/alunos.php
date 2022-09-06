@@ -54,6 +54,7 @@ if (@$_SESSION['id_usuario'] == null || @$_SESSION['nivel_usuario'] != 'secretar
                         $cpf = $res[$i]['cpf'];
                         $foto = $res[$i]['foto'];
                         $id = $res[$i]['id'];
+                        $sexo = $res[$i]['sexo'];
 
 
                     ?>
@@ -181,7 +182,7 @@ if (@$_SESSION['id_usuario'] == null || @$_SESSION['nivel_usuario'] != 'secretar
 
                                     <div class="form-group">
                                         <label>Sexo</label>
-                                        <select name="sexo" class="form-control" id="sexo">
+                                        <select name="sexo" class="form-control" id="sexo" selected="M">
 									<option <?php if(@$sexo2 == 'M'){ ?> selected <?php } ?> value="M">M</option>
 									<option <?php if(@$sexo2 == 'F'){ ?> selected <?php } ?> value="F">F</option>
 									
@@ -317,6 +318,7 @@ if (@$_SESSION['id_usuario'] == null || @$_SESSION['nivel_usuario'] != 'secretar
                     $email3 = $res[0]['email'];
                     $endereco3 = $res[0]['endereco'];
                     $foto3 = $res[0]['foto'];
+                    $sexo3 = $res[0]['sexo'];
                 }
 
 

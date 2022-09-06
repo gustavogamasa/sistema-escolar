@@ -75,9 +75,14 @@ if($antigo2 != $email){
 
 
 if($id == ""){
+	if($sexo !== ""){
 	$res = $pdo->prepare("INSERT INTO alunos SET nome = :nome, cpf = :cpf, email = :email, endereco = :endereco, telefone = :telefone, foto = '$imagem', sexo = :sexo, data_nascimento = :data_nascimento, responsavel = :responsavel, data_cadastro = curDate()");	
+	$res2 = $pdo->prepare("INSERT INTO usuarios SET nome = :nome, cpf = :cpf, email = :email, senha = :senha, nivel = :nivel");
+	} else {
+		$res = $pdo->prepare("INSERT INTO alunos SET nome = :nome, cpf = :cpf, email = :email, endereco = :endereco, telefone = :telefone, foto = '$imagem', sexo = M, data_nascimento = :data_nascimento, responsavel = :responsavel, data_cadastro = curDate()");	
+		$res2 = $pdo->prepare("INSERT INTO usuarios SET nome = :nome, cpf = :cpf, email = :email, senha = :senha, nivel = :nivel");
+	}
 
-	$res2 = $pdo->prepare("INSERT INTO usuarios SET nome = :nome, cpf = :cpf, email = :email, senha = :senha, nivel = :nivel");	
 	$res2->bindValue(":senha", '123');
 	$res2->bindValue(":nivel", 'aluno');
 
@@ -92,8 +97,10 @@ if($id == ""){
 	}
 
 	$res2 = $pdo->prepare("UPDATE usuarios SET nome = :nome, cpf = :cpf, email = :email WHERE cpf = '$antigo'");	
-	
 }
+
+
+
 
 $res->bindValue(":nome", $nome);
 $res->bindValue(":cpf", $cpf);
