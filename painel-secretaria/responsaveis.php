@@ -1,6 +1,6 @@
 <?php 
 
-$pag = "tesoureiros";
+$pag = "responsaveis";
 
 require_once("../conexao.php"); 
 @session_start();
@@ -24,7 +24,7 @@ function debug_to_console($data) {
 
 <div class="row mt-4 mb-4">
 
-    <a type="button" class="btn-info btn-sm ml-3 d-none d-md-block" href="index.php?pag=<?php echo $pag ?>&funcao=novo">Novo tesoureiro</a>
+    <a type="button" class="btn-info btn-sm ml-3 d-none d-md-block" href="index.php?pag=<?php echo $pag ?>&funcao=novo">Novo responsável</a>
     <a type="button" class="btn-primary btn-sm ml-3 d-block d-sm-none" href="index.php?pag=<?php echo $pag ?>&funcao=novo">+</a>
     
 </div>
@@ -52,7 +52,7 @@ function debug_to_console($data) {
 
                    <?php 
 
-                   $query = $pdo->query("SELECT * FROM tesoureiros order by id desc ");
+                   $query = $pdo->query("SELECT * FROM responsaveis order by id desc ");
                    $res = $query->fetchAll(PDO::FETCH_ASSOC);
 
                    for ($i=0; $i < count($res); $i++) { 
@@ -110,7 +110,7 @@ function debug_to_console($data) {
                     $titulo = "Editar Registro";
                     $id2 = $_GET['id'];
 
-                    $query = $pdo->query("SELECT * FROM tesoureiros where id = '" . $id2 . "' ");
+                    $query = $pdo->query("SELECT * FROM responsaveis where id = '" . $id2 . "' ");
                     $res = $query->fetchAll(PDO::FETCH_ASSOC);
 
                       $nome2 = $res[0]['nome'];
@@ -252,7 +252,7 @@ function debug_to_console($data) {
 					
 					$id2 = $_GET['id'];
 
-					$query = $pdo->query("SELECT * FROM tesoureiros where id = '$id2' ");
+					$query = $pdo->query("SELECT * FROM responsaveis where id = '$id2' ");
 					$res = $query->fetchAll(PDO::FETCH_ASSOC);
 					$nome3 = $res[0]['nome'];
 					$cpf3 = $res[0]['cpf'];
@@ -457,7 +457,7 @@ if (@$_GET["funcao"] != null && @$_GET["funcao"] == "endereco") {
 					
 					$id2 = $_GET['id'];
 
-					$query = $pdo->query("SELECT * FROM tesoureiros where id = '$id2' ");
+					$query = $pdo->query("SELECT * FROM responsaveis where id = '$id2' ");
 					$res = $query->fetchAll(PDO::FETCH_ASSOC);
 					$nome3 = $res[0]['nome'];
 					$cpf3 = $res[0]['cpf'];
