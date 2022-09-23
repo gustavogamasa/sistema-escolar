@@ -9,7 +9,7 @@ $email = $_POST['email'];
 $endereco = $_POST['endereco'];
 $sexo = $_POST['sexo'];
 $data_nasc = $_POST['data_nasc'];
-$responsavel = $POST['responsavel'];
+$responsavel = $_POST['responsavel'];
 
 $antigo = $_POST['antigo'];
 $antigo2 = $_POST['antigo2'];
@@ -26,6 +26,8 @@ if ($responsavel == "") {
 		exit();
 	}
 }
+
+
 
 
 if ($nome == "") {
