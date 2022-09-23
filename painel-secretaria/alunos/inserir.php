@@ -27,7 +27,31 @@ if ($responsavel == "") {
 	}
 }
 
-
+//VERIFICAR SE O RESPONSÁVEL ESTÁ CADASTRADO
+if($responsavel != ""){
+	$query = $pdo->query("SELECT * FROM responsaveis where cpf = '$responsavel' ");
+		$res = $query->fetchAll(PDO::FETCH_ASSOC);
+		$total_reg = @count($res);
+		if($total_reg == 0){
+			echo 'O CPF do Responsável não foi encontrado, provavelmente não está Cadastrado!';
+			exit();
+		}
+	}
+	
+	if($nome == ""){
+		echo 'O nome é Obrigatório!';
+		exit();
+	}
+	
+	if($email == ""){
+		echo 'O email é Obrigatório!';
+		exit();
+	}
+	
+	if($cpf == ""){
+		echo 'O CPF é Obrigatório!';
+		exit();
+	}
 
 
 if ($nome == "") {
