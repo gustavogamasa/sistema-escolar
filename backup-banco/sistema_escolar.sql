@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Aug 11, 2022 at 06:11 AM
+-- Generation Time: Sep 23, 2022 at 06:14 AM
 -- Server version: 10.4.17-MariaDB
 -- PHP Version: 7.2.34
 
@@ -20,6 +20,35 @@ SET time_zone = "+00:00";
 --
 -- Database: `sistema_escolar`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `alunos`
+--
+
+CREATE TABLE `alunos` (
+  `id` int(11) NOT NULL,
+  `nome` varchar(50) NOT NULL,
+  `cpf` varchar(20) NOT NULL,
+  `telefone` varchar(20) NOT NULL,
+  `email` varchar(50) NOT NULL,
+  `endereco` varchar(100) NOT NULL,
+  `responsavel` varchar(20) DEFAULT NULL,
+  `data_nascimento` date NOT NULL,
+  `data_cadastro` date NOT NULL,
+  `foto` varchar(100) DEFAULT NULL,
+  `sexo` varchar(20) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `alunos`
+--
+
+INSERT INTO `alunos` (`id`, `nome`, `cpf`, `telefone`, `email`, `endereco`, `responsavel`, `data_nascimento`, `data_cadastro`, `foto`, `sexo`) VALUES
+(1, 'Aluno 1', '133.333.333-33', '(12) 31231-2312', 'aluno1@sistema.com', 'Rua bem Legal mas sem almondega', NULL, '1995-01-01', '2022-09-05', 'sem-foto.jpg', 'M'),
+(2, 'Aluno 2', '132.222.222-22', '(12) 31231-31', 'aluno2@sistema.com', 'Endereço bem louco', NULL, '2022-09-05', '2022-09-05', 'jimmy.jpeg', 'F'),
+(4, 'ASdAsdasd', '123.123.123-12', '(12) 31231-231', 'DSgsfsdf', '123123123', '123.981.763-86', '2022-09-23', '2022-09-23', 'sem-foto.jpg', 'M');
 
 -- --------------------------------------------------------
 
@@ -91,6 +120,29 @@ INSERT INTO `professores` (`id`, `nome`, `cpf`, `telefone`, `email`, `endereco`,
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `responsaveis`
+--
+
+CREATE TABLE `responsaveis` (
+  `id` int(11) NOT NULL,
+  `nome` varchar(100) NOT NULL,
+  `cpf` varchar(20) NOT NULL,
+  `email` varchar(50) NOT NULL,
+  `telefone` varchar(20) NOT NULL,
+  `endereco` varchar(100) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `responsaveis`
+--
+
+INSERT INTO `responsaveis` (`id`, `nome`, `cpf`, `email`, `telefone`, `endereco`) VALUES
+(1, 'Responsavel 1', '123.981.763-86', 'resp1@email.com', '(12) 31283-1872', 'iuhiuhih'),
+(3, 'Responsavel 1', '333.331.333-33', 'responsavel2@email.com', '(12) 31231-2312', 'Endereço daora');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `salas`
 --
 
@@ -157,6 +209,24 @@ INSERT INTO `tesoureiros` (`id`, `nome`, `cpf`, `telefone`, `endereco`, `email`)
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `turmas`
+--
+
+CREATE TABLE `turmas` (
+  `id` int(11) NOT NULL,
+  `disciplina` int(11) NOT NULL,
+  `sala` int(11) NOT NULL,
+  `professor` int(11) NOT NULL,
+  `data_inicio` date DEFAULT NULL,
+  `data_final` date DEFAULT NULL,
+  `horario` varchar(30) DEFAULT NULL,
+  `dia` varchar(30) DEFAULT NULL,
+  `valor_mensalidade` decimal(7,2) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `usuarios`
 --
 
@@ -178,12 +248,23 @@ INSERT INTO `usuarios` (`id`, `nome`, `cpf`, `email`, `senha`, `nivel`) VALUES
 (22, 'Professor 2', '222.222.222-22', '2@email.com', '123', 'professor'),
 (23, 'Professor 3', '333.333.333-33', '3@email.com', '123', 'professor'),
 (24, 'Administrador', '000.000.000-00', 'admin', 'admin', 'admin'),
-(25, 'Secretario 1', '211.111.111-11', 'secretario', 'secretario', 'secretaria'),
-(26, 'Tesoureiro 1', '133.333.333-33', 'tesoureiro1@email.com', '123', 'tesouraria');
+(25, 'Secretario teste', '211.111.111-12', 'secretario', 'secretario', 'secretaria'),
+(26, 'Tesoureiro 1', '133.333.333-33', 'tesoureiro1@email.com', '123', 'tesouraria'),
+(27, 'Aluno 1', '133.333.333-33', 'aluno1@sistema.com', '123', 'aluno'),
+(28, 'Aluno 1', '133.333.333-33', 'aluno1@sistema.com', '123', 'aluno'),
+(29, 'Aluno 2', '132.222.222-22', 'aluno2@sistema.com', '123', 'aluno'),
+(36, 'Responsavel 1', '333.331.333-33', 'responsavel2@email.com', '123', 'tesouraria'),
+(38, 'ASdAsdasd', '123.123.123-12', 'DSgsfsdf', '123', 'aluno');
 
 --
 -- Indexes for dumped tables
 --
+
+--
+-- Indexes for table `alunos`
+--
+ALTER TABLE `alunos`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `disciplinas`
@@ -201,6 +282,12 @@ ALTER TABLE `funcionarios`
 -- Indexes for table `professores`
 --
 ALTER TABLE `professores`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `responsaveis`
+--
+ALTER TABLE `responsaveis`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -222,6 +309,12 @@ ALTER TABLE `tesoureiros`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `turmas`
+--
+ALTER TABLE `turmas`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `usuarios`
 --
 ALTER TABLE `usuarios`
@@ -230,6 +323,12 @@ ALTER TABLE `usuarios`
 --
 -- AUTO_INCREMENT for dumped tables
 --
+
+--
+-- AUTO_INCREMENT for table `alunos`
+--
+ALTER TABLE `alunos`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `disciplinas`
@@ -250,6 +349,12 @@ ALTER TABLE `professores`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
+-- AUTO_INCREMENT for table `responsaveis`
+--
+ALTER TABLE `responsaveis`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
 -- AUTO_INCREMENT for table `salas`
 --
 ALTER TABLE `salas`
@@ -265,13 +370,19 @@ ALTER TABLE `secretarios`
 -- AUTO_INCREMENT for table `tesoureiros`
 --
 ALTER TABLE `tesoureiros`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
+-- AUTO_INCREMENT for table `turmas`
+--
+ALTER TABLE `turmas`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `usuarios`
 --
 ALTER TABLE `usuarios`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=39;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
