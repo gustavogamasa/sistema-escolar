@@ -225,6 +225,8 @@ $idUsuario = @$res[0]['id'];
                         } else if (@$pag==$menu6) {
                         @include_once(@$menu6.".php");
 
+                         } else if (@$pag==$menu7) {
+                        @include_once(@$menu7.".php");
                        
                         
                         } else {
