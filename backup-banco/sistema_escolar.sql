@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Nov 17, 2022 at 03:16 AM
+-- Generation Time: Nov 17, 2022 at 04:04 AM
 -- Server version: 10.4.17-MariaDB
 -- PHP Version: 7.2.34
 
@@ -49,9 +49,7 @@ INSERT INTO `alunos` (`id`, `nome`, `cpf`, `telefone`, `email`, `endereco`, `res
 (1, 'Felipe Santos', '788.888.888-88', '(99) 99999-9999', 'felipe@hotmail.com', 'Rua Almeida Campos 150', '', '2000-11-16', '2020-11-16', 'team-1.jpg', 'M'),
 (2, 'Mariano Campos', '789.555.555-55', '(55) 55555-5555', 'mariano@hotmail.com', 'Rua Almeida Campos 145', '', '2001-11-16', '2020-11-16', 'usuario-icone.jpg', 'M'),
 (3, 'Marina Silva', '875.555.555-55', '(55) 55555-5555', 'marina@hotmail.com', 'Rua C', '', '2000-11-16', '2020-11-16', 'team-2.jpg', 'F'),
-(5, 'Rui Costaa', '488.888.888-88', '(33) 33333-3333', 'rui@hotmail.com', 'Rua Almeida Campos 150', '222.222.222-22', '2002-11-17', '2020-11-17', 'sem-foto.jpg', 'M'),
-(6, 'Outro aluno', '123.123.131-12', '(11) 11111-1111', 'giosadig@email.com', '', '', '1993-02-10', '2022-11-16', 'sem-foto.jpg', 'M'),
-(7, 'Teste 123123', '111.111.111-11', '', 'teste@procemsoeifj.com', '', '', '1995-03-03', '2022-11-16', 'sem-foto.jpg', 'M');
+(5, 'Rui Costaa', '488.888.888-88', '(33) 33333-3333', 'rui@hotmail.com', 'Rua Almeida Campos 150', '222.222.222-22', '2002-11-17', '2020-11-17', 'sem-foto.jpg', 'M');
 
 -- --------------------------------------------------------
 
@@ -71,7 +69,8 @@ CREATE TABLE `disciplinas` (
 INSERT INTO `disciplinas` (`id`, `nome`) VALUES
 (1, 'Programação WEB'),
 (2, 'WEB Designer'),
-(4, 'Design Gráfico');
+(4, 'Design Gráfico'),
+(5, 'Programador de Jogos');
 
 -- --------------------------------------------------------
 
@@ -115,11 +114,212 @@ CREATE TABLE `matriculas` (
 --
 
 INSERT INTO `matriculas` (`id`, `turma`, `aluno`, `data`) VALUES
-(1, 1, 5, '2020-11-17'),
-(3, 1, 1, '2020-11-17'),
-(6, 2, 1, '2020-11-17'),
-(7, 1, 2, '2020-11-17'),
-(8, 2, 3, '2020-11-17');
+(13, 2, 5, '2020-11-18'),
+(14, 1, 5, '2020-11-18'),
+(15, 3, 5, '2020-11-18'),
+(16, 4, 5, '2020-11-18'),
+(17, 1, 2, '2020-11-18'),
+(18, 1, 3, '2020-11-18'),
+(19, 2, 1, '2020-11-18'),
+(20, 2, 3, '2020-11-18'),
+(21, 3, 3, '2020-11-18');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `movimentacoes`
+--
+
+CREATE TABLE `movimentacoes` (
+  `id` int(11) NOT NULL,
+  `tipo` varchar(20) NOT NULL,
+  `descricao` varchar(50) NOT NULL,
+  `valor` decimal(7,2) NOT NULL,
+  `funcionario` varchar(20) NOT NULL,
+  `data` date NOT NULL,
+  `mensalidade` varchar(5) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `movimentacoes`
+--
+
+INSERT INTO `movimentacoes` (`id`, `tipo`, `descricao`, `valor`, `funcionario`, `data`, `mensalidade`) VALUES
+(1, 'Entrada', 'Pagamento Mensalidade', '60.00', '444.444.455-55', '2020-11-18', 'Sim'),
+(2, 'Entrada', 'Pagamento Mensalidade', '60.00', '444.444.455-55', '2020-11-18', 'Sim'),
+(3, 'Entrada', 'Pagamento Mensalidade', '80.00', '444.444.455-55', '2020-11-18', 'Sim'),
+(4, 'Entrada', 'Pagamento Mensalidade', '50.00', '444.444.455-55', '2020-11-18', 'Sim'),
+(5, 'Entrada', 'Pagamento Mensalidade', '50.00', '444.444.455-55', '2020-11-18', 'Sim'),
+(6, 'Entrada', 'Pagamento Mensalidade', '50.00', '444.444.455-55', '2020-11-18', 'Sim'),
+(7, 'Entrada', 'Pagamento Mensalidade', '80.00', '444.444.455-55', '2020-11-18', 'Sim'),
+(10, 'Entrada', 'Pagamento Mensalidade', '80.00', '444.444.455-55', '2020-11-18', 'Sim'),
+(11, 'Entrada', 'Pagamento Mensalidade', '90.00', '444.444.455-55', '2020-11-19', 'Sim'),
+(12, 'Entrada', 'Pagamento Mensalidade', '80.00', '444.444.455-55', '2020-11-19', 'Sim');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `pgto_matriculas`
+--
+
+CREATE TABLE `pgto_matriculas` (
+  `id` int(11) NOT NULL,
+  `matricula` int(11) NOT NULL,
+  `valor` decimal(7,2) NOT NULL,
+  `data_venc` date NOT NULL,
+  `pago` varchar(5) NOT NULL,
+  `arquivo` varchar(100) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `pgto_matriculas`
+--
+
+INSERT INTO `pgto_matriculas` (`id`, `matricula`, `valor`, `data_venc`, `pago`, `arquivo`) VALUES
+(13, 13, '90.00', '2020-02-02', 'Sim', 'boleto-teste.pdf'),
+(14, 13, '90.00', '2020-03-02', 'Não', NULL),
+(15, 13, '90.00', '2020-04-02', 'Não', NULL),
+(16, 13, '90.00', '2020-05-02', 'Não', NULL),
+(17, 13, '90.00', '2020-06-02', 'Não', NULL),
+(18, 13, '90.00', '2020-07-02', 'Não', NULL),
+(19, 13, '90.00', '2020-08-02', 'Não', NULL),
+(20, 13, '90.00', '2020-09-02', 'Não', NULL),
+(21, 13, '90.00', '2020-10-02', 'Não', NULL),
+(22, 13, '90.00', '2020-11-02', 'Não', NULL),
+(23, 13, '90.00', '2020-12-02', 'Não', NULL),
+(24, 13, '90.00', '2021-01-02', 'Não', NULL),
+(25, 14, '80.00', '2019-01-01', 'Sim', 'boleto-teste.pdf'),
+(26, 14, '80.00', '2019-02-01', 'Não', 'boleto-teste.pdf'),
+(27, 14, '80.00', '2019-03-01', 'Não', NULL),
+(28, 14, '80.00', '2019-04-01', 'Não', NULL),
+(29, 14, '80.00', '2019-05-01', 'Não', NULL),
+(30, 14, '80.00', '2019-06-01', 'Não', NULL),
+(31, 14, '80.00', '2019-07-01', 'Não', NULL),
+(32, 14, '80.00', '2019-08-01', 'Não', NULL),
+(33, 14, '80.00', '2019-09-01', 'Não', NULL),
+(34, 14, '80.00', '2019-10-01', 'Não', NULL),
+(35, 14, '80.00', '2019-11-01', 'Não', NULL),
+(36, 14, '80.00', '2019-12-01', 'Não', NULL),
+(37, 14, '80.00', '2020-01-01', 'Não', NULL),
+(38, 14, '80.00', '2020-02-01', 'Não', NULL),
+(39, 14, '80.00', '2020-03-01', 'Não', NULL),
+(40, 14, '80.00', '2020-04-01', 'Não', NULL),
+(41, 14, '80.00', '2020-05-01', 'Não', NULL),
+(42, 14, '80.00', '2020-06-01', 'Não', NULL),
+(43, 14, '80.00', '2020-07-01', 'Não', NULL),
+(44, 14, '80.00', '2020-08-01', 'Não', NULL),
+(45, 14, '80.00', '2020-09-01', 'Não', NULL),
+(46, 14, '80.00', '2020-10-01', 'Não', NULL),
+(47, 14, '80.00', '2020-11-01', 'Não', NULL),
+(48, 14, '80.00', '2020-12-01', 'Não', NULL),
+(49, 15, '50.00', '2020-12-01', 'Sim', 'boleto-teste.pdf'),
+(50, 15, '50.00', '2021-01-01', 'Sim', NULL),
+(51, 15, '50.00', '2021-02-01', 'Sim', NULL),
+(52, 15, '50.00', '2021-03-01', 'Não', NULL),
+(53, 15, '50.00', '2021-04-01', 'Não', NULL),
+(54, 15, '50.00', '2021-05-01', 'Não', NULL),
+(55, 15, '50.00', '2021-06-01', 'Não', NULL),
+(56, 15, '50.00', '2021-07-01', 'Não', NULL),
+(57, 15, '50.00', '2021-08-01', 'Não', NULL),
+(58, 15, '50.00', '2021-09-01', 'Não', NULL),
+(59, 15, '50.00', '2021-10-01', 'Não', NULL),
+(60, 15, '50.00', '2021-11-01', 'Não', NULL),
+(61, 16, '60.00', '2020-11-01', 'Sim', NULL),
+(62, 16, '60.00', '2020-12-01', 'Sim', NULL),
+(63, 16, '60.00', '2021-01-01', 'Não', NULL),
+(64, 16, '60.00', '2021-02-01', 'Não', NULL),
+(65, 16, '60.00', '2021-03-01', 'Não', NULL),
+(66, 16, '60.00', '2021-04-01', 'Não', NULL),
+(67, 16, '60.00', '2021-05-01', 'Não', NULL),
+(68, 16, '60.00', '2021-06-01', 'Não', NULL),
+(69, 16, '60.00', '2021-07-01', 'Não', NULL),
+(70, 16, '60.00', '2021-08-01', 'Não', NULL),
+(71, 16, '60.00', '2021-09-01', 'Não', NULL),
+(72, 16, '60.00', '2021-10-01', 'Não', NULL),
+(73, 17, '80.00', '2019-01-01', 'Sim', NULL),
+(74, 17, '80.00', '2019-02-01', 'Não', NULL),
+(75, 17, '80.00', '2019-03-01', 'Não', NULL),
+(76, 17, '80.00', '2019-04-01', 'Não', NULL),
+(77, 17, '80.00', '2019-05-01', 'Não', NULL),
+(78, 17, '80.00', '2019-06-01', 'Não', NULL),
+(79, 17, '80.00', '2019-07-01', 'Não', NULL),
+(80, 17, '80.00', '2019-08-01', 'Não', NULL),
+(81, 17, '80.00', '2019-09-01', 'Não', NULL),
+(82, 17, '80.00', '2019-10-01', 'Não', NULL),
+(83, 17, '80.00', '2019-11-01', 'Não', NULL),
+(84, 17, '80.00', '2019-12-01', 'Não', NULL),
+(85, 17, '80.00', '2020-01-01', 'Não', NULL),
+(86, 17, '80.00', '2020-02-01', 'Não', NULL),
+(87, 17, '80.00', '2020-03-01', 'Não', NULL),
+(88, 17, '80.00', '2020-04-01', 'Não', NULL),
+(89, 17, '80.00', '2020-05-01', 'Não', NULL),
+(90, 17, '80.00', '2020-06-01', 'Não', NULL),
+(91, 17, '80.00', '2020-07-01', 'Não', NULL),
+(92, 17, '80.00', '2020-08-01', 'Não', NULL),
+(93, 17, '80.00', '2020-09-01', 'Não', NULL),
+(94, 17, '80.00', '2020-10-01', 'Não', NULL),
+(95, 17, '80.00', '2020-11-01', 'Não', NULL),
+(96, 17, '80.00', '2020-12-01', 'Não', NULL),
+(97, 18, '80.00', '2019-01-01', 'Sim', 'boleto-teste.pdf'),
+(98, 18, '80.00', '2019-02-01', 'Sim', NULL),
+(99, 18, '80.00', '2019-03-01', 'Não', NULL),
+(100, 18, '80.00', '2019-04-01', 'Não', NULL),
+(101, 18, '80.00', '2019-05-01', 'Não', NULL),
+(102, 18, '80.00', '2019-06-01', 'Não', NULL),
+(103, 18, '80.00', '2019-07-01', 'Não', NULL),
+(104, 18, '80.00', '2019-08-01', 'Não', NULL),
+(105, 18, '80.00', '2019-09-01', 'Não', NULL),
+(106, 18, '80.00', '2019-10-01', 'Não', NULL),
+(107, 18, '80.00', '2019-11-01', 'Não', NULL),
+(108, 18, '80.00', '2019-12-01', 'Não', NULL),
+(109, 18, '80.00', '2020-01-01', 'Não', NULL),
+(110, 18, '80.00', '2020-02-01', 'Não', NULL),
+(111, 18, '80.00', '2020-03-01', 'Não', NULL),
+(112, 18, '80.00', '2020-04-01', 'Não', NULL),
+(113, 18, '80.00', '2020-05-01', 'Não', NULL),
+(114, 18, '80.00', '2020-06-01', 'Não', NULL),
+(115, 18, '80.00', '2020-07-01', 'Não', NULL),
+(116, 18, '80.00', '2020-08-01', 'Não', NULL),
+(117, 18, '80.00', '2020-09-01', 'Não', NULL),
+(118, 18, '80.00', '2020-10-01', 'Não', NULL),
+(119, 18, '80.00', '2020-11-01', 'Não', NULL),
+(120, 18, '80.00', '2020-12-01', 'Não', NULL),
+(121, 19, '90.00', '2020-02-02', 'Não', NULL),
+(122, 19, '90.00', '2020-03-02', 'Não', NULL),
+(123, 19, '90.00', '2020-04-02', 'Não', NULL),
+(124, 19, '90.00', '2020-05-02', 'Não', NULL),
+(125, 19, '90.00', '2020-06-02', 'Não', NULL),
+(126, 19, '90.00', '2020-07-02', 'Não', NULL),
+(127, 19, '90.00', '2020-08-02', 'Não', NULL),
+(128, 19, '90.00', '2020-09-02', 'Não', NULL),
+(129, 19, '90.00', '2020-10-02', 'Não', NULL),
+(130, 19, '90.00', '2020-11-02', 'Não', NULL),
+(131, 19, '90.00', '2020-12-02', 'Não', NULL),
+(132, 19, '90.00', '2021-01-02', 'Não', NULL),
+(133, 20, '90.00', '2020-02-02', 'Não', NULL),
+(134, 20, '90.00', '2020-03-02', 'Não', NULL),
+(135, 20, '90.00', '2020-04-02', 'Não', NULL),
+(136, 20, '90.00', '2020-05-02', 'Não', NULL),
+(137, 20, '90.00', '2020-06-02', 'Não', NULL),
+(138, 20, '90.00', '2020-07-02', 'Não', NULL),
+(139, 20, '90.00', '2020-08-02', 'Não', NULL),
+(140, 20, '90.00', '2020-09-02', 'Não', NULL),
+(141, 20, '90.00', '2020-10-02', 'Não', NULL),
+(142, 20, '90.00', '2020-11-02', 'Não', NULL),
+(143, 20, '90.00', '2020-12-02', 'Não', NULL),
+(144, 20, '90.00', '2021-01-02', 'Não', NULL),
+(145, 21, '50.00', '2020-12-01', 'Não', NULL),
+(146, 21, '50.00', '2021-01-01', 'Não', NULL),
+(147, 21, '50.00', '2021-02-01', 'Não', NULL),
+(148, 21, '50.00', '2021-03-01', 'Não', NULL),
+(149, 21, '50.00', '2021-04-01', 'Não', NULL),
+(150, 21, '50.00', '2021-05-01', 'Não', NULL),
+(151, 21, '50.00', '2021-06-01', 'Não', NULL),
+(152, 21, '50.00', '2021-07-01', 'Não', NULL),
+(153, 21, '50.00', '2021-08-01', 'Não', NULL),
+(154, 21, '50.00', '2021-09-01', 'Não', NULL),
+(155, 21, '50.00', '2021-10-01', 'Não', NULL),
+(156, 21, '50.00', '2021-11-01', 'Não', NULL);
 
 -- --------------------------------------------------------
 
@@ -234,8 +434,8 @@ CREATE TABLE `tesoureiros` (
 --
 
 INSERT INTO `tesoureiros` (`id`, `nome`, `cpf`, `telefone`, `email`, `endereco`) VALUES
-(1, 'Marcelo Silva', '788.888.888-88', '(88) 88888-8888', 'marcelo@hotmail.com', 'Rua Almeida Campos 150'),
-(2, 'Tesoureiro Teste', '789.555.555-55', '(63) 22222-2222', 'tesoureiro@hotmail.com', 'Rua A');
+(3, 'Tesoureiro Teste', '444.444.455-55', '(55) 55555-5555', 'tesoureiro@hotmail.com', 'Rua Almeida Campos 150'),
+(4, 'Rubens Silva', '789.541.222-22', '(45) 55555-5555', 'rubens@hotmail.com', 'Rua C');
 
 -- --------------------------------------------------------
 
@@ -261,9 +461,10 @@ CREATE TABLE `turmas` (
 --
 
 INSERT INTO `turmas` (`id`, `disciplina`, `sala`, `professor`, `data_inicio`, `data_final`, `horario`, `dia`, `valor_mensalidade`, `ano`) VALUES
-(1, 1, 2, 3, '2020-12-01', '2021-12-01', '8:00 as 12:00', 'Sexta-Feira', '80.00', 2020),
-(2, 4, 1, 4, '2020-11-02', '2021-11-02', '13:00 as 17:00', 'Segunda a Sexta', '90.00', 2020),
-(3, 2, 3, 3, '2022-11-26', '2022-11-29', '13:00 as 14:00', 'Segunda-feira', '32.00', 2022);
+(1, 1, 2, 3, '2019-01-01', '2021-01-01', '8:00 as 12:00', 'Sexta-Feira', '80.00', 2020),
+(2, 4, 1, 4, '2020-02-02', '2021-02-02', '13:00 as 17:00', 'Segunda a Sexta', '90.00', 2020),
+(3, 2, 5, 4, '2020-12-01', '2021-12-01', '13:00 as 17:00', 'Segunda a Sexta', '50.00', 2020),
+(4, 5, 3, 3, '2020-11-01', '2021-11-01', '8:00 as 12:00', 'Sexta-Feira', '60.00', 2020);
 
 -- --------------------------------------------------------
 
@@ -285,19 +486,17 @@ CREATE TABLE `usuarios` (
 --
 
 INSERT INTO `usuarios` (`id`, `nome`, `cpf`, `email`, `senha`, `nivel`) VALUES
-(5, 'Marcos Pedro', '555.555.555-55', 'admin', 'admin', 'Admin'),
+(5, 'Marcos Pedro', '555.555.555-55', 'marcos@hotmail.com', '123', 'secretaria'),
 (6, 'Secretário Teste', '222.222.222-22', 'secretario@hotmail.com', '123', 'secretaria'),
 (9, 'Professor Teste', '777.777.777-77', 'professor@hotmail.com', '123', 'professor'),
-(10, 'Felipe Santos', '788.888.888-88', 'felipe@hotmail.com', '123', 'professor'),
-(12, 'Administrador', '000.000.000-00', 'hvfadvocacia@gmail.com', '123', 'Admin'),
+(12, 'Administrador', '000.000.000-00', 'admin', 'admin', 'Admin'),
 (13, 'Felipe Santos', '788.888.888-88', 'secretaria', 'secretaria', 'secretaria'),
-(14, 'Tesoureiro Teste', '789.555.555-55', 'tesoureiro@hotmail.com', '123', 'secretaria'),
 (15, 'Felipe Santos', '788.888.888-88', 'felipe@hotmail.com', '123', 'aluno'),
-(16, 'Mariano Campos', '789.555.555-55', 'mariano@hotmail.com', '123', 'aluno'),
+(16, 'Mariano Campos', '789.555.555-55', 'aluno', 'aluno', 'aluno'),
 (17, 'Marina Silva', '875.555.555-55', 'marina@hotmail.com', '123', 'aluno'),
 (19, 'Rui Costaa', '488.888.888-88', 'rui@hotmail.com', '123', 'aluno'),
-(20, 'Outro aluno', '123.123.131-12', 'giosadig@email.com', '123', 'aluno'),
-(21, 'Teste 123123', '111.111.111-11', 'teste@procemsoeifj.com', '123', 'aluno');
+(20, 'Tesoureiro Teste', '444.444.455-55', 'tesoureiro', 'tesoureiro', 'tesoureiro'),
+(21, 'Rubens Silva', '789.541.222-22', 'rubens@hotmail.com', '123', 'tesoureiro');
 
 --
 -- Indexes for dumped tables
@@ -325,6 +524,18 @@ ALTER TABLE `funcionarios`
 -- Indexes for table `matriculas`
 --
 ALTER TABLE `matriculas`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `movimentacoes`
+--
+ALTER TABLE `movimentacoes`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `pgto_matriculas`
+--
+ALTER TABLE `pgto_matriculas`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -377,13 +588,13 @@ ALTER TABLE `usuarios`
 -- AUTO_INCREMENT for table `alunos`
 --
 ALTER TABLE `alunos`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `disciplinas`
 --
 ALTER TABLE `disciplinas`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `funcionarios`
@@ -395,7 +606,19 @@ ALTER TABLE `funcionarios`
 -- AUTO_INCREMENT for table `matriculas`
 --
 ALTER TABLE `matriculas`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+
+--
+-- AUTO_INCREMENT for table `movimentacoes`
+--
+ALTER TABLE `movimentacoes`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+
+--
+-- AUTO_INCREMENT for table `pgto_matriculas`
+--
+ALTER TABLE `pgto_matriculas`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=157;
 
 --
 -- AUTO_INCREMENT for table `professores`
@@ -425,13 +648,13 @@ ALTER TABLE `secretarios`
 -- AUTO_INCREMENT for table `tesoureiros`
 --
 ALTER TABLE `tesoureiros`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `turmas`
 --
 ALTER TABLE `turmas`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `usuarios`
