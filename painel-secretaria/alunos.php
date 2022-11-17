@@ -61,7 +61,10 @@ if(@$_SESSION['id_usuario'] == null || @$_SESSION['nivel_usuario'] != 'secretari
 
 
                   <tr>
-                    <td><?php echo $nome ?></td>
+                    <td>
+                        <a href="index.php?pag=<?php echo $pag ?>&funcao=matriculas&id=<?php echo $id ?>" title="Ver Matrículas" class="text-dark"><?php echo $nome ?></a>
+                            
+                        </td>
                     <td><?php echo $telefone ?></td>
                     <td><?php echo $email ?></td>
                     <td><?php echo $cpf ?></td>
@@ -75,8 +78,7 @@ if(@$_SESSION['id_usuario'] == null || @$_SESSION['nivel_usuario'] != 'secretari
                        <a href="index.php?pag=<?php echo $pag ?>&funcao=endereco&id=<?php echo $id ?>" class='text-info mr-1' title='Ver Endereço'><i class='fas fa-home'></i></a>
                    </td>
                </tr>
-           <?php 
-        } ?>
+           <?php } ?>
 
 
 
@@ -386,6 +388,73 @@ if(@$_SESSION['id_usuario'] == null || @$_SESSION['nivel_usuario'] != 'secretari
 
 
 
+
+
+
+<div class="modal" id="modal-matriculas" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Matrículas do Aluno</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+
+            <?php 
+                 $query = $pdo->query("SELECT * FROM matriculas where aluno = '$_GET[id]' order by id desc ");
+                               $res = $query->fetchAll(PDO::FETCH_ASSOC);
+
+                               for ($i=0; $i < count($res); $i++) { 
+                                  foreach ($res[$i] as $key => $value) {
+                                  }
+
+                                  $aluno = $res[$i]['aluno'];
+                                  $turma = $res[$i]['turma'];
+                                  $data = $res[$i]['data'];
+
+                                  $dataF = implode('/', array_reverse(explode('-', $data)));
+
+                                  $id_m = $res[$i]['id'];
+
+                                  
+
+
+                     $query_r = $pdo->query("SELECT * FROM turmas where id = '" . $turma . "' ");
+                    $res_r = $query_r->fetchAll(PDO::FETCH_ASSOC);
+
+                    $id_disciplina = $res_r[0]['disciplina'];
+
+
+                     $query_r = $pdo->query("SELECT * FROM disciplinas where id = '" . $id_disciplina . "' ");
+                    $res_r = $query_r->fetchAll(PDO::FETCH_ASSOC);
+
+                    $nome_disc = $res_r[0]['nome'];
+
+                 ?>
+                <span><?php echo $nome_disc ?>
+
+                <a target="_blank" title="Gerar Contrato" href="../rel/contrato.php?id=<?php echo $id_m ?>"><span class="ml-2"><i class='fas fa-book-open text-primary'></i></span></a>
+
+                   <a target="_blank" title="Gerar Declaração Matrícula" href="../rel/declaracao.php?id=<?php echo $id_m ?>"><span class="ml-2"><i class='far fa-sticky-note text-danger'></i></span></a>
+
+            </span>
+
+                <hr style="margin:4px">
+
+            <?php } ?>
+                
+
+            </div>
+            
+        </div>
+    </div>
+</div>
+
+
+
+
 <?php 
 
 if (@$_GET["funcao"] != null && @$_GET["funcao"] == "novo") {
@@ -402,6 +471,10 @@ if (@$_GET["funcao"] != null && @$_GET["funcao"] == "excluir") {
 
 if (@$_GET["funcao"] != null && @$_GET["funcao"] == "endereco") {
     echo "<script>$('#modal-endereco').modal('show');</script>";
+}
+
+if (@$_GET["funcao"] != null && @$_GET["funcao"] == "matriculas") {
+    echo "<script>$('#modal-matriculas').modal('show');</script>";
 }
 
 ?>

@@ -11,7 +11,6 @@
     $menu5 = "disciplinas";
     $menu6 = "salas";
     $menu7 = "turmas";
-    $hoje = date('Y-m-d', time());
 
 
     //RECUPERAR DADOS DO USUÁRIO
@@ -37,7 +36,7 @@ $idUsuario = @$res[0]['id'];
         <meta name="description" content="">
         <meta name="author" content="Hugo Vasconcelos">
 
-        <title>Painel Secretaria</title>
+        <title>Painel Secretária</title>
 
         <!-- Custom fonts for this template-->
         <link href="../vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -70,7 +69,7 @@ $idUsuario = @$res[0]['id'];
                 <!-- Sidebar - Brand -->
                 <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.php">
 
-                    <div class="sidebar-brand-text mx-3">Secretaria</div>
+                    <div class="sidebar-brand-text mx-3">Secretária</div>
                 </a>
 
                 <!-- Divider -->
@@ -166,7 +165,6 @@ $idUsuario = @$res[0]['id'];
                             <i class="fa fa-bars"></i>
                         </button>
                         <img class="mt-2" src="../img/logo.png" width="150">
-                        <ln><?php echo $hoje ?></ln>
 
 
 

@@ -316,9 +316,9 @@ if(@$_SESSION['id_usuario'] == null || @$_SESSION['nivel_usuario'] != 'secretari
 
                 <p>Deseja realmente Excluir este Registro?</p>
 
-                <div align="center" id="mensagem_excluir" class="">
+                <small><div align="center" id="mensagem_excluir" class="">
 
-                </div>
+                </div></small>
 
             </div>
             <div class="modal-footer">
@@ -587,6 +587,32 @@ if (@$_GET["funcao"] != null && @$_GET["funcao"] == "confirmar") {
     if(@count($res_r) == 0){
          $res = $pdo->query("INSERT INTO matriculas SET turma = '$id_turma', aluno = '$id_aluno', data = curDate()");
 
+         $id_matricula = $pdo->lastInsertId();
+
+     //GERAR AS PARCELAS DE PAGAMENTO MATRICULA
+     $query_r = $pdo->query("SELECT * FROM turmas where id = '$id_turma' ");
+    $res_r = $query_r->fetchAll(PDO::FETCH_ASSOC);    
+    $data_ini = $res_r[0]['data_inicio'];
+    $data_fin = $res_r[0]['data_final'];
+    $valor_turma = $res_r[0]['valor_mensalidade'];
+
+    //RECUPERAR O TOTAL DE MESES ENTRE DATAS
+$d1 = new DateTime($data_ini);
+$d2 = new DateTime($data_fin);
+$intervalo = $d1->diff( $d2 );
+$anos = $intervalo->y;
+$meses = $intervalo->m + ($anos * 12);
+
+ for ($i=0; $i < $meses; $i++) { 
+
+    //INCREMENTAR 1 MES NA DATA INICIAL
+         $data_nova = date('Y/m/d', strtotime("+$i month",strtotime($data_ini))); 
+
+         $res = $pdo->query("INSERT INTO pgto_matriculas SET matricula = '$id_matricula', valor = '$valor_turma', data_venc = '$data_nova', pago = 'Não'");
+
+
+    }
+
     }
 
     echo "<script>window.location='index.php?pag=$pag&id_turma=$id_turma&id_aluno=$id_aluno&funcao=matriculados';</script>";
@@ -607,6 +633,8 @@ if (@$_GET["funcao"] != null && @$_GET["funcao"] == "excluir_matricula") {
    
    
          $res = $pdo->query("DELETE from matriculas WHERE id = '$id_m'");
+
+         $res = $pdo->query("DELETE from pgto_matriculas WHERE matricula = '$id_m'");
 
     echo "<script>window.location='index.php?pag=$pag&id_turma=$id_turma&id_aluno=$id_aluno&funcao=matriculados';</script>";
    
@@ -692,6 +720,7 @@ if (@$_GET["funcao"] != null && @$_GET["funcao"] == "excluir_matricula") {
                         window.location = "index.php?pag=" + pag;
                     }
 
+                    $('#mensagem_excluir').addClass('text-danger')
                     $('#mensagem_excluir').text(mensagem)
 
 
