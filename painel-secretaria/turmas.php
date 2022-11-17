@@ -1,31 +1,20 @@
 <?php 
-
-$pag = "responsaveis";
-
+$pag = "turmas";
 require_once("../conexao.php"); 
-@session_start();
 
+@session_start();
     //verificar se o usuário está autenticado
 if(@$_SESSION['id_usuario'] == null || @$_SESSION['nivel_usuario'] != 'secretaria'){
     echo "<script language='javascript'> window.location='../index.php' </script>";
 
 }
 
-function debug_to_console($data) {
-    $output = $data;
-    if (is_array($output))
-        $output = implode(',', $output);
-
-    echo "<script>console.log('Debug Objects: " . $output . "' );</script>";
-}
-
 
 ?>
 
 <div class="row mt-4 mb-4">
-
-    <a type="button" class="btn-info btn-sm ml-3 d-none d-md-block" href="index.php?pag=<?php echo $pag ?>&funcao=novo">Novo responsável</a>
-    <a type="button" class="btn-primary btn-sm ml-3 d-block d-sm-none" href="index.php?pag=<?php echo $pag ?>&funcao=novo">+</a>
+    <a type="button" class="btn-info btn-sm ml-3 d-none d-md-block" href="index.php?pag=<?php echo $pag ?>&funcao=novo">Nova Turma</a>
+    <a type="button" class="btn-info btn-sm ml-3 d-block d-sm-none" href="index.php?pag=<?php echo $pag ?>&funcao=novo">+</a>
     
 </div>
 
@@ -39,11 +28,11 @@ function debug_to_console($data) {
             <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                 <thead>
                     <tr>
-                        <th>Nome</th>
-                        <th>Telefone</th>
-                        <th>Email</th>
-                        <th>CPF</th>
-                       
+                        <th>Disciplina</th>
+                        <th>Sala</th>
+                        <th>Professor</th>
+                        <th>Horário</th>
+                        <th>Dias</th>
                         <th>Ações</th>
                     </tr>
                 </thead>
@@ -52,57 +41,74 @@ function debug_to_console($data) {
 
                    <?php 
 
-                   $query = $pdo->query("SELECT * FROM responsaveis order by id desc ");
+                   $query = $pdo->query("SELECT * FROM turmas order by id desc ");
                    $res = $query->fetchAll(PDO::FETCH_ASSOC);
 
                    for ($i=0; $i < count($res); $i++) { 
                       foreach ($res[$i] as $key => $value) {
                       }
 
-                      $nome = $res[$i]['nome'];
-                      $telefone = $res[$i]['telefone'];
-                      $email = $res[$i]['email'];
-                      $cpf = $res[$i]['cpf'];
-                      $endereco = $res[$i]['endereco'];
-                      
+                      $disciplina = $res[$i]['disciplina'];
+                      $sala = $res[$i]['sala'];
+                      $professor = $res[$i]['professor'];
+                      $horario = $res[$i]['horario'];
+                      $dia = $res[$i]['dia'];
                       $id = $res[$i]['id'];
 
-                       
+                      //RECUPERAR NOME DISCIPLINA
+                      $query_r = $pdo->query("SELECT * FROM disciplinas where id =  '$disciplina'");
+                      $res_r = $query_r->fetchAll(PDO::FETCH_ASSOC);
+                      $nome_disc = $res_r[0]['nome'];
+
+                       //RECUPERAR NOME SALA
+                      $query_r = $pdo->query("SELECT * FROM salas where id =  '$sala'");
+                      $res_r = $query_r->fetchAll(PDO::FETCH_ASSOC);
+                      $nome_sala = $res_r[0]['sala'];
+
+                       //RECUPERAR NOME PROFESSOR
+                      $query_r = $pdo->query("SELECT * FROM professores where id =  '$professor'");
+                      $res_r = $query_r->fetchAll(PDO::FETCH_ASSOC);
+                      $nome_prof = $res_r[0]['nome'];
+
                       ?>
 
 
-                    <tr>
-                        <td><?php echo $nome ?></td>
-                        <td><?php echo $telefone ?></td>
-                        <td><?php echo $email ?></td>
-                        <td><?php echo $cpf ?></td>
-                       
+                      <tr>
+                        <td><?php echo $nome_disc ?></td>
+                        <td><?php echo $nome_sala ?></td>
+                        <td><?php echo $nome_prof ?></td>
+                        <td><?php echo $horario ?></td>
+                        <td><?php echo $dia ?></td>
+
 
                         <td>
-                             <a href="index.php?pag=<?php echo $pag ?>&funcao=editar&id=<?php echo $id ?>" class='text-primary mr-1' title='Editar Dados'><i class='far fa-edit'></i></a>
-                             <a href="index.php?pag=<?php echo $pag ?>&funcao=excluir&id=<?php echo $id ?>" class='text-danger mr-1' title='Excluir Registro'><i class='far fa-trash-alt'></i></a>
-                             <a href="index.php?pag=<?php echo $pag ?>&funcao=endereco&id=<?php echo $id ?>" class='text-info mr-1' title='Ver Endereço'><i class='fas fa-home'></i></a>
-                        </td>
-                    </tr>
-<?php } ?>
+                         <a href="index.php?pag=<?php echo $pag ?>&funcao=editar&id=<?php echo $id ?>" class='text-primary mr-1' title='Editar Dados'><i class='far fa-edit'></i></a>
+                         <a href="index.php?pag=<?php echo $pag ?>&funcao=excluir&id=<?php echo $id ?>" class='text-danger mr-1' title='Excluir Registro'><i class='far fa-trash-alt'></i></a>
+
+                         <a href="index.php?pag=<?php echo $pag ?>&funcao=endereco&id=<?php echo $id ?>" class='text-info mr-1' title='Ver Endereço'><i class='fas fa-home'></i></a>
+
+                         <a href="index.php?pag=<?php echo $pag ?>&funcao=matricula&id=<?php echo $id ?>" class='text-success mr-1' title='Matricular Aluno'><i class='fas fa-user-plus'></i></a>
+                     </td>
+                 </tr>
+             <?php } ?>
 
 
 
 
 
-                </tbody>
-            </table>
-        </div>
-    </div>
+         </tbody>
+     </table>
+ </div>
+</div>
 </div>
 
 
 
 
 
-<!-- Modal EDITAR -->
+<!-- Modal -->
 <div class="modal fade" id="modalDados" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
+    <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header">
                 <?php 
@@ -110,17 +116,20 @@ function debug_to_console($data) {
                     $titulo = "Editar Registro";
                     $id2 = $_GET['id'];
 
-                    $query = $pdo->query("SELECT * FROM responsaveis where id = '" . $id2 . "' ");
+                    $query = $pdo->query("SELECT * FROM turmas where id = '" . $id2 . "' ");
                     $res = $query->fetchAll(PDO::FETCH_ASSOC);
 
-                      $nome2 = $res[0]['nome'];
-                      $telefone2 = $res[0]['telefone'];
-                      $email2 = $res[0]['email'];
-                      $cpf2 = $res[0]['cpf'];
-                      $endereco2 = $res[0]['endereco'];
-                      
-                  
-                                                            
+                    $disciplina2 = $res[0]['disciplina'];
+                    $sala2 = $res[0]['sala'];
+                    $professor2 = $res[0]['professor'];
+                    $horario2 = $res[0]['horario'];
+                    $dia2 = $res[0]['dia'];
+                    $data_inicio2 = $res[0]['data_inicio'];
+                    $data_final2 = $res[0]['data_final'];
+                    $valor_mensalidade2 = $res[0]['valor_mensalidade'];
+                    $ano2 = $res[0]['ano'];
+
+
 
                 } else {
                     $titulo = "Inserir Registro";
@@ -131,67 +140,162 @@ function debug_to_console($data) {
                 ?>
                 
                 <h5 class="modal-title" id="exampleModalLabel"><?php echo $titulo ?></h5>
-
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-
                     <span aria-hidden="true">&times;</span>
-                    
                 </button>
             </div>
             <form id="form" method="POST">
                 <div class="modal-body">
 
-                    <div class="form-group">
-                        <label >Nome</label>
-                        <input value="<?php echo @$nome2 ?>" type="text" class="form-control" id="nome" name="nome" placeholder="Nome">
-                    </div>
-                    <div class="form-group">
-                        <label >Telefone</label>
-                        <input value="<?php echo @$telefone2 ?>" type="text" class="form-control" id="telefone" name="telefone" placeholder="Telefone">
-                    </div>
-                    <div class="form-group">
-                        <label >Email</label>
-                        <input value="<?php echo @$email2 ?>" type="text" class="form-control" id="email" name="email" placeholder="Email">
-                    </div>
-                    <div class="form-group">
-                        <label >CPF</label>
-                        <input value="<?php echo @$cpf2 ?>" type="text" class="form-control" id="cpf" name="cpf" placeholder="CPF">
-                    </div>
-                    <div class="form-group">
-                        <label >Endereço</label>
-                        <input value="<?php echo @$endereco2 ?>" type="text" class="form-control" id="endereco" name="endereco" placeholder="Endereço">
-                    </div>
+                    <div class="row">
+                        <div class="col-md-4">
 
-                  
-                   
+                         <div class="form-group">
+                            <label >Disciplina</label>
+                            <select name="disciplina" class="form-control" id="disciplina">
 
-                    <small>
-                        <div id="mensagem">
+                                <?php 
 
+                                $query = $pdo->query("SELECT * FROM disciplinas order by nome asc ");
+                                $res = $query->fetchAll(PDO::FETCH_ASSOC);
+
+                                for ($i=0; $i < @count($res); $i++) { 
+                                    foreach ($res[$i] as $key => $value) {
+                                    }
+                                    $nome_reg = $res[$i]['nome'];
+                                    $id_reg = $res[$i]['id'];
+                                    ?>                                  
+                                    <option <?php if(@$disciplina2 == $id_reg){ ?> selected <?php } ?> value="<?php echo $id_reg ?>"><?php echo $nome_reg ?></option>
+                                <?php } ?>
+
+                            </select>
                         </div>
-                    </small> 
 
+
+                    </div>
+                    <div class="col-md-4">
+                       <div class="form-group">
+                        <label >Sala</label>
+                        <select name="sala" class="form-control" id="sala">
+
+                            <?php 
+
+                            $query = $pdo->query("SELECT * FROM salas order by sala asc ");
+                            $res = $query->fetchAll(PDO::FETCH_ASSOC);
+
+                            for ($i=0; $i < @count($res); $i++) { 
+                                foreach ($res[$i] as $key => $value) {
+                                }
+                                $nome_reg = $res[$i]['sala'];
+                                $id_reg = $res[$i]['id'];
+                                ?>                                  
+                                <option <?php if(@$sala2 == $id_reg){ ?> selected <?php } ?> value="<?php echo $id_reg ?>"><?php echo $nome_reg ?></option>
+                            <?php } ?>
+
+                        </select>
+                    </div>
                 </div>
+                <div class="col-md-4">
+                   <div class="form-group">
+                    <label >Professor</label>
+                    <select name="professor" class="form-control" id="professor">
 
+                        <?php 
 
+                        $query = $pdo->query("SELECT * FROM professores order by nome asc ");
+                        $res = $query->fetchAll(PDO::FETCH_ASSOC);
 
-                <div class="modal-footer">
+                        for ($i=0; $i < @count($res); $i++) { 
+                            foreach ($res[$i] as $key => $value) {
+                            }
+                            $nome_reg = $res[$i]['nome'];
+                            $id_reg = $res[$i]['id'];
+                            ?>                                  
+                            <option <?php if(@$professor2 == $id_reg){ ?> selected <?php } ?> value="<?php echo $id_reg ?>"><?php echo $nome_reg ?></option>
+                        <?php } ?>
 
-
-
-                <input value="<?php echo @$_GET['id'] ?>" type="hidden" name="txtid2" id="txtid2">
-                <!-- input do CPF para verificar duplicidade -->
-                <input value="<?php echo @$cpf2 ?>" type="hidden" name="antigo" id="antigo">
-                <input value="<?php echo @$email2 ?>" type="hidden" name="antigo2" id="antigo2">
-                
-
-                    <button type="button" id="btn-fechar" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-                    <button type="submit" name="btn-salvar" id="btn-salvar" class="btn btn-primary">Salvar</button>
-
+                    </select>
                 </div>
-            </form>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label >Data Início</label>
+                    <input value="<?php echo @$data_inicio2 ?>" type="date" class="form-control" id="data_inicio" name="data_inicio">
+                </div>
+            </div>
+            <div class="col-md-4">
+              <div class="form-group">
+                <label >Data Final</label>
+                <input value="<?php echo @$data_final2 ?>" type="date" class="form-control" id="data_final" name="data_final">
+            </div>
+        </div>
+        <div class="col-md-4">
+         <div class="form-group">
+            <label >Horário Aulas</label>
+            <input value="<?php echo @$horario2 ?>" type="text" class="form-control" id="horario" name="horario" placeholder="De xx:xx às xx:xx">
         </div>
     </div>
+</div>
+
+
+
+<div class="row">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label >Dias das Aulas</label>
+            <input value="<?php echo @$dia2 ?>" type="text" class="form-control" id="dia" name="dia" placeholder="Segunda à Sexta">
+        </div>
+    </div>
+    <div class="col-md-4">
+     <div class="form-group">
+        <label >Valor Mensalidade</label>
+        <input value="<?php echo @$valor_mensalidade2 ?>" type="text" class="form-control" id="valor_mensalidade" name="valor_mensalidade" placeholder="Valor da Mensalidade">
+    </div>
+</div>
+<div class="col-md-4">
+    <div class="form-group">
+        <label >Ano Início</label>
+        <input value="<?php echo @$ano2 ?>" type="number" class="form-control" id="ano" name="ano" placeholder="Ano da Turma">
+    </div>
+</div>
+</div>
+
+
+
+
+
+
+
+
+
+
+<small>
+    <div id="mensagem">
+
+    </div>
+</small> 
+
+</div>
+
+
+
+<div class="modal-footer">
+
+
+
+    <input value="<?php echo @$_GET['id'] ?>" type="hidden" name="txtid2" id="txtid2">
+    <input value="<?php echo @$cpf2 ?>" type="hidden" name="antigo" id="antigo">
+    <input value="<?php echo @$email2 ?>" type="hidden" name="antigo2" id="antigo2">
+
+    <button type="button" id="btn-fechar" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+    <button type="submit" name="btn-salvar" id="btn-salvar" class="btn btn-primary">Salvar</button>
+</div>
+</form>
+</div>
+</div>
 </div>
 
 
@@ -231,55 +335,221 @@ function debug_to_console($data) {
 </div>
 
 
-<!-- MODAL PARA MOSTRAR O ENDEREÇO -->
+
+
 
 
 <div class="modal" id="modal-endereco" tabindex="-1" role="dialog">
-	<div class="modal-dialog" role="document">
-		<div class="modal-content">
-			<div class="modal-header">
-				<h5 class="modal-title">Dados do responsável</h5>
-				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-					<span aria-hidden="true">&times;</span>
-				</button>
-			</div>
-			<div class="modal-body">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Dados da Turma</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
 
-				<?php 
-				if (@$_GET['funcao'] == 'endereco') {
+                <?php 
+                if (@$_GET['funcao'] == 'endereco') {
 
-                  
-					
-					$id2 = $_GET['id'];
+                    $id2 = $_GET['id'];
 
-					$query = $pdo->query("SELECT * FROM responsaveis where id = '$id2' ");
-					$res = $query->fetchAll(PDO::FETCH_ASSOC);
-					$nome3 = $res[0]['nome'];
-					$cpf3 = $res[0]['cpf'];
-					$telefone3 = $res[0]['telefone'];
-					$email3 = $res[0]['email'];
-					$endereco3 = $res[0]['endereco'];
+                    $query = $pdo->query("SELECT * FROM turmas where id = '$id2' ");
+                    $res = $query->fetchAll(PDO::FETCH_ASSOC);
+                    $disciplina3 = $res[0]['disciplina'];
+                    $sala3 = $res[0]['sala'];
+                    $professor3 = $res[0]['professor'];
+                    $horario3 = $res[0]['horario'];
+                    $dia3 = $res[0]['dia'];
+                    $data_inicio3 = $res[0]['data_inicio'];
+                    $data_final3 = $res[0]['data_final'];
+                    $valor_mensalidade3 = $res[0]['valor_mensalidade'];
+                    $ano3 = $res[0]['ano'];
 
-                   
-					
-				} 
 
-              
-				?>
+                     //RECUPERAR NOME DISCIPLINA
+                    $query_r = $pdo->query("SELECT * FROM disciplinas where id =  '$disciplina3'");
+                    $res_r = $query_r->fetchAll(PDO::FETCH_ASSOC);
+                    $nome_disc3 = $res_r[0]['nome'];
 
-				<span><b>Nome: </b> <i><?php echo $nome3 ?></i><br>
-				<span><b>Telefone: </b> <i><?php echo $telefone3 ?></i> <span class="ml-4"><b>CPF: </b> <i><?php echo $cpf3 ?></i><br>
-				<span><b>Email: </b> <i><?php echo $email3 ?><br>
-				<span><b>Endereço: </b> <i><?php echo $endereco3 ?><br>
-              
+                       //RECUPERAR NOME SALA
+                    $query_r = $pdo->query("SELECT * FROM salas where id =  '$sala3'");
+                    $res_r = $query_r->fetchAll(PDO::FETCH_ASSOC);
+                    $nome_sala3 = $res_r[0]['sala'];
+
+                       //RECUPERAR NOME PROFESSOR
+                    $query_r = $pdo->query("SELECT * FROM professores where id =  '$professor3'");
+                    $res_r = $query_r->fetchAll(PDO::FETCH_ASSOC);
+                    $nome_prof3 = $res_r[0]['nome'];
+
+                    $valor_mensF = number_format($valor_mensalidade3, 2, ',', '.');
+                    $data_inicioF = implode('/', array_reverse(explode('-', $data_inicio3)));
+                    $data_finalF = implode('/', array_reverse(explode('-', $data_final3)));
+                    
+                } 
+
+
+                ?>
+
+                <span><b>Disciplina: </b> <i><?php echo $nome_disc3 ?></i><br></span>
+
+                <span><b>Sala: </b> <i><?php echo $nome_sala3 ?></i> </span><span class="ml-4"><b>Professor: </b> <i><?php echo $nome_prof3 ?></i><br></span>
+
+                <span><b>Data Início: </b> <i><?php echo $data_inicioF ?></i> </span><span class="ml-4"><b>Data Final: </b> <i><?php echo $data_finalF ?></i><br></span>
+
+                <span><b>Horário: </b> <i><?php echo $horario3 ?></i> </span><span class="ml-4"><b>Dias: </b> <i><?php echo $dia3 ?></i><br></span>
+
+                <span><b>Valor Mensalidade: </b> <i>R$ <?php echo $valor_mensF ?></i> </span><span class="ml-4"><b>Ano: </b> <i><?php echo $ano3 ?></i><br></span>
+
+
+                <span><b>Total de Alunos: </b> <i> total</i> </span>
+
+
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+<div class="modal" id="modal-matricula" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Matricular Aluno <small><a class="text-dark" title="Ver Alunos Matriculados" href="index.php?pag=<?php echo $pag ?>&funcao=matriculados&id_turma=<?php echo $_GET['id'] ?>"><u>Ver Alunos</u></a></small></h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+
+               <!-- DataTales Example -->
+               <div class="card shadow mb-4">
+
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-bordered" id="dataTable2" width="100%" cellspacing="0">
+                            <thead>
+                                <tr>
+                                    <th>Nome</th>
+                                    <th>Telefone</th>
+                                    <th>Email</th>
+                                    <th>CPF</th>
+                                    <th>Foto</th>
+                                    <th>Ações</th>
+                                </tr>
+                            </thead>
+
+                            <tbody>
+
+                               <?php 
+
+                               $query = $pdo->query("SELECT * FROM alunos order by id desc ");
+                               $res = $query->fetchAll(PDO::FETCH_ASSOC);
+
+                               for ($i=0; $i < count($res); $i++) { 
+                                  foreach ($res[$i] as $key => $value) {
+                                  }
+
+                                  $nome = $res[$i]['nome'];
+                                  $telefone = $res[$i]['telefone'];
+                                  $email = $res[$i]['email'];
+                                  $endereco = $res[$i]['endereco'];
+                                  $cpf = $res[$i]['cpf'];
+                                  $foto = $res[$i]['foto'];
+                                  $id_aluno = $res[$i]['id'];
+
+
+                                  ?>
+
+
+                                  <tr>
+                                    <td><?php echo $nome ?></td>
+                                    <td><?php echo $telefone ?></td>
+                                    <td><?php echo $email ?></td>
+                                    <td><?php echo $cpf ?></td>
+                                    <td><img src="../img/alunos/<?php echo $foto ?>" width="50"></td>
+
+
+                                    <td>
+
+                                     <a href="index.php?pag=<?php echo $pag ?>&funcao=confirmar&id_turma=<?php echo $_GET['id'] ?>&id_aluno=<?php echo $id_aluno ?>" class='text-info mr-1' title='Confirmar Matricula'><i class='fas fa-check'></i></a>
+                                 </td>
+                             </tr>
+                         <?php } ?>
+
+
+
+
+
+                     </tbody>
+                 </table>
+             </div>
+         </div>
+     </div>
+
+
+
+ </div>
+
+</div>
+</div>
+</div>
+
+
+
+
+
+<div class="modal" id="modal-matriculados" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Alunos Matriculados</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <?php 
+                 $query = $pdo->query("SELECT * FROM matriculas where turma = '$_GET[id_turma]' order by id desc ");
+                               $res = $query->fetchAll(PDO::FETCH_ASSOC);
+
+                               for ($i=0; $i < count($res); $i++) { 
+                                  foreach ($res[$i] as $key => $value) {
+                                  }
+
+                                  $aluno = $res[$i]['aluno'];
+                                  $id_m = $res[$i]['id'];
+                                   $query_r = $pdo->query("SELECT * FROM alunos where id = '" . $aluno . "' ");
+                    $res_r = $query_r->fetchAll(PDO::FETCH_ASSOC);
+
+                    $nome_aluno = $res_r[0]['nome'];
+
+                 ?>
+                <span><small><?php echo $nome_aluno ?><a title="Excluir Matrícula" href="index.php?pag=<?php echo $pag ?>&funcao=excluir_matricula&id_m=<?php echo $id_m ?>&id_turma=<?php echo $_GET['id_turma'] ?>"><span class="ml-2"><i class='fas fa-times text-danger'></i></span></a></small></span>
+
+                <hr style="margin:4px">
+
+            <?php } ?>
 
                
 
-			</div>
-			
-		</div>
-	</div>
+            </div>
+           
+        </div>
+    </div>
 </div>
+
+
+
+
+
 
 
 <?php 
@@ -297,8 +567,52 @@ if (@$_GET["funcao"] != null && @$_GET["funcao"] == "excluir") {
 }
 
 if (@$_GET["funcao"] != null && @$_GET["funcao"] == "endereco") {
-    echo "<script>$('#modal-endereco').modal('show');</script>"; 
+    echo "<script>$('#modal-endereco').modal('show');</script>";
 }
+
+
+if (@$_GET["funcao"] != null && @$_GET["funcao"] == "matricula") {
+    echo "<script>$('#modal-matricula').modal('show');</script>";
+}
+
+
+if (@$_GET["funcao"] != null && @$_GET["funcao"] == "confirmar") {
+
+    $id_turma = $_GET['id_turma'];
+    $id_aluno = $_GET['id_aluno'];
+
+    $query_r = $pdo->query("SELECT * FROM matriculas where turma = '$id_turma' and aluno = '$id_aluno' ");
+    $res_r = $query_r->fetchAll(PDO::FETCH_ASSOC);
+
+    if(@count($res_r) == 0){
+         $res = $pdo->query("INSERT INTO matriculas SET turma = '$id_turma', aluno = '$id_aluno', data = curDate()");
+
+    }
+
+    echo "<script>window.location='index.php?pag=$pag&id_turma=$id_turma&id_aluno=$id_aluno&funcao=matriculados';</script>";
+   
+    
+}
+
+if (@$_GET["funcao"] != null && @$_GET["funcao"] == "matriculados") {
+    echo "<script>$('#modal-matriculados').modal('show');</script>";
+}
+
+
+
+if (@$_GET["funcao"] != null && @$_GET["funcao"] == "excluir_matricula") {
+
+    $id_m = $_GET['id_m'];
+    $id_turma = $_GET['id_turma'];
+   
+   
+         $res = $pdo->query("DELETE from matriculas WHERE id = '$id_m'");
+
+    echo "<script>window.location='index.php?pag=$pag&id_turma=$id_turma&id_aluno=$id_aluno&funcao=matriculados';</script>";
+   
+    
+}
+
 
 ?>
 
@@ -322,7 +636,7 @@ if (@$_GET["funcao"] != null && @$_GET["funcao"] == "endereco") {
                 $('#mensagem').removeClass()
 
                 if (mensagem.trim() == "Salvo com Sucesso!") {
-                    
+
                     //$('#nome').val('');
                     //$('#cpf').val('');
                     $('#btn-fechar').click();
@@ -391,11 +705,6 @@ if (@$_GET["funcao"] != null && @$_GET["funcao"] == "endereco") {
 
 
 
-
-
-
-
-
 <!--SCRIPT PARA CARREGAR IMAGEM -->
 <script type="text/javascript">
 
@@ -425,65 +734,13 @@ if (@$_GET["funcao"] != null && @$_GET["funcao"] == "endereco") {
 
 
 <script type="text/javascript">
-    
     $(document).ready(function () {
         $('#dataTable').dataTable({
             "ordering": false
         })
 
     });
-
 </script>
 
-
-<!-- MODAL PARA MOSTRAR O ENDEREÇO -->
-
-
-<div class="modal" id="modal-endereco" tabindex="-1" role="dialog">
-	<div class="modal-dialog" role="document">
-		<div class="modal-content">
-			<div class="modal-header">
-				<h5 class="modal-title">Dados do tesoureiro</h5>
-				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-					<span aria-hidden="true">&times;</span>
-				</button>
-			</div>
-			<div class="modal-body">
-
-				<?php 
-				if (@$_GET['funcao'] == 'endereco') {
-
-                  
-					
-					$id2 = $_GET['id'];
-
-					$query = $pdo->query("SELECT * FROM responsaveis where id = '$id2' ");
-					$res = $query->fetchAll(PDO::FETCH_ASSOC);
-					$nome3 = $res[0]['nome'];
-					$cpf3 = $res[0]['cpf'];
-					$telefone3 = $res[0]['telefone'];
-					$email3 = $res[0]['email'];
-					$endereco3 = $res[0]['endereco'];
-
-                   
-					
-				} 
-
-              
-				?>
-
-				<span><b>Nome: </b> <i><?php echo $nome3 ?></i><br>
-				<span><b>Telefone: </b> <i><?php echo $telefone3 ?></i> <span class="ml-4"><b>CPF: </b> <i><?php echo $cpf3 ?></i><br>
-				<span><b>Email: </b> <i><?php echo $email3 ?><br>
-				<span><b>Endereço: </b> <i><?php echo $endereco3 ?><br>
-              
-
-               
-
-			</div>
-			
-		</div>
-	</div>
-</div>
 
 

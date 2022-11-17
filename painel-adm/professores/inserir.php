@@ -1,5 +1,4 @@
 <?php 
-
 require_once("../../conexao.php"); 
 
 $nome = $_POST['nome'];
@@ -39,6 +38,19 @@ if($antigo != $cpf){
 }
 
 
+//VERIFICAR SE O REGISTRO COM MESMO EMAIL JÁ EXISTE NO BANCO
+if($antigo2 != $email){
+	$query = $pdo->query("SELECT * FROM professores where email = '$email' ");
+	$res = $query->fetchAll(PDO::FETCH_ASSOC);
+	$total_reg = @count($res);
+	if($total_reg > 0){
+		echo 'O Email já está Cadastrado!';
+		exit();
+	}
+}
+
+
+
 //SCRIPT PARA SUBIR FOTO NO BANCO
 $nome_img = preg_replace('/[ -]+/' , '-' , @$_FILES['imagem']['name']);
 $caminho = '../../img/professores/' .$nome_img;
@@ -58,19 +70,6 @@ move_uploaded_file($imagem_temp, $caminho);
 }
 
 
-
-//VERIFICAR SE O REGISTRO COM MESMO EMAIL JÁ EXISTE NO BANCO
-if($antigo2 != $email){
-	$query = $pdo->query("SELECT * FROM professores where email = '$email' ");
-	$res = $query->fetchAll(PDO::FETCH_ASSOC);
-	$total_reg = @count($res);
-	if($total_reg > 0){
-		echo 'O Email já está Cadastrado!';
-		exit();
-	}
-}
-
-
 if($id == ""){
 	$res = $pdo->prepare("INSERT INTO professores SET nome = :nome, cpf = :cpf, email = :email, endereco = :endereco, telefone = :telefone, foto = '$imagem'");	
 
@@ -79,14 +78,12 @@ if($id == ""){
 	$res2->bindValue(":nivel", 'professor');
 
 }else{
-	if($imagem == 'sem-foto.jpg'){
-
+	if($imagem == "sem-foto.jpg"){
 		$res = $pdo->prepare("UPDATE professores SET nome = :nome, cpf = :cpf, email = :email, endereco = :endereco, telefone = :telefone WHERE id = '$id'");
-
-	} else {
+	}else{
 		$res = $pdo->prepare("UPDATE professores SET nome = :nome, cpf = :cpf, email = :email, endereco = :endereco, telefone = :telefone, foto = '$imagem' WHERE id = '$id'");
-
 	}
+	
 
 	$res2 = $pdo->prepare("UPDATE usuarios SET nome = :nome, cpf = :cpf, email = :email WHERE cpf = '$antigo'");	
 	

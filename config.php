@@ -1,17 +1,16 @@
-<?php
+<?php 
 
-$nome_escola = "Escola genérica";
-$url = "http://127.0.0.1/escolar";
-$endereco_escola = "Rua 123";
-$telefone_escola =  "123123123";
-$email_adm = 'gustavo@sistemaeduque.com.br';
-$rodape_relatorios = 'Desenovlvido por Gustavo Amaral - RA: 1942346-5';
+$nome_escola = "Escola Freitas";
+$url = "http://localhost/escola/";
+$endereco_escola = "Rua Alameda Campos, 157, Belo Horizonte";
+$telefone_escola = "(31)97527-5084";
+$email_adm = 'hvfadvocacia@gmail.com';
+$rodape_relatorios = "Desenvolvido por Hugo Vasconcelos - Portal Hugo Cursos";
 
-//Dados do banco local
-$servidor = "localhost";
-$usuario = "root";
-$senha = "";
-$banco = "sistema_escolar";
+//VARIAVEIS DO BANCO DE DADOS LOCAL
+$servidor = 'localhost';
+$usuario = 'root';
+$senha = '';
+$banco = 'sistema_escolar';
 
-
-?>
+ ?>

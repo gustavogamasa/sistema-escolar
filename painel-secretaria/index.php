@@ -1,33 +1,32 @@
 <?php 
     @session_start();
-    require_once("../conexao.php");
+    require_once("../conexao.php"); 
 
-    //variaveis para o menu ADMIN
+    //variaveis para o menu
     $pag = @$_GET["pag"];
     $menu1 = "alunos";
     $menu2 = "responsaveis";
-    $menu3 = "tesoureiros";
+    $menu3 = "turmas";
     $menu4 = "funcionarios";
     $menu5 = "disciplinas";
     $menu6 = "salas";
     $menu7 = "turmas";
+    $hoje = date('Y-m-d', time());
 
-    //recuperar dados do usuário
 
-    $query = $pdo->query("SELECT * FROM usuarios where id = '$_SESSION[id_usuario]'");
-    $res = $query->fetchAll(PDO::FETCH_ASSOC);
-    $nome_usu = @$res[0]['nome'];
-    $cpf_usu = @$res[0]['cpf'];
-    $email_usu = @$res[0]['email'];
-    $idUsuario = @$res[0]['id'];
-  
+    //RECUPERAR DADOS DO USUÁRIO
+$query = $pdo->query("SELECT * FROM usuarios where id = '$_SESSION[id_usuario]'");
+$res = $query->fetchAll(PDO::FETCH_ASSOC);
+$nome_usu = @$res[0]['nome'];
+$cpf_usu = @$res[0]['cpf'];
+$email_usu = @$res[0]['email'];
+$idUsuario = @$res[0]['id'];  
+
  ?>
 
 
 
-
 <!DOCTYPE html>
-
 <html lang="pt-br">
 
     <head>
@@ -40,23 +39,23 @@
 
         <title>Painel Secretaria</title>
 
-        <!-- Custom fonts-->
+        <!-- Custom fonts for this template-->
         <link href="../vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
         <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
 
-        <!-- Custom styles-->
+        <!-- Custom styles for this template-->
         <link href="../css/sb-admin-2.min.css" rel="stylesheet">
         <link href="../css/style.css" rel="stylesheet">
         
         <link href="../vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
 
 
-        <!-- Bootstrap core JS-->
+        <!-- Bootstrap core JavaScript-->
         <script src="../vendor/jquery/jquery.min.js"></script>
         <script src="../vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
         
-         <link rel="shortcut icon" href="/img/icon.ico" type="image/x-icon">
-    <link rel="icon" href="/img/icon.ico" type="image/x-icon">
+    <link rel="shortcut icon" href="../img/icone.ico" type="image/x-icon">
+    <link rel="icon" href="../img/icone.ico" type="image/x-icon">
 
     </head>
 
@@ -66,7 +65,7 @@
         <div id="wrapper">
 
             <!-- Sidebar -->
-            <ul class="navbar-nav bg-gradient-dark sidebar sidebar-dark accordion" id="accordionSidebar">
+            <ul class="navbar-nav bg-gradient-info sidebar sidebar-dark accordion" id="accordionSidebar">
 
                 <!-- Sidebar - Brand -->
                 <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.php">
@@ -96,12 +95,11 @@
                     </a>
                     <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                         <div class="bg-white py-2 collapse-inner rounded">
-                            <h6 class="collapse-header">PESSOAS:</h6>
-
+                            
                             <a class="collapse-item" href="index.php?pag=<?php echo $menu1 ?>">Alunos</a>
-                            <a class="collapse-item" href="index.php?pag=<?php echo $menu2 ?>">Responsáveis</a>
+                            <a class="collapse-item" href="index.php?pag=<?php echo $menu2 ?>">Responsável</a>
 
-
+                             
                         </div>
                     </div>
                 </li>
@@ -110,14 +108,14 @@
                 <li class="nav-item">
                     <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities" aria-expanded="true" aria-controls="collapseUtilities">
                         <i class="fas fa-home"></i>
-                        <span>Turmas & Idiomas</span>
+                        <span>Turmas / Matrículas</span>
                     </a>
                     <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
                         <div class="bg-white py-2 collapse-inner rounded">
-
-                            <a class="collapse-item" href="index.php?pag=<?php echo $menu5 ?>">Disciplinas</a>
+                           
+                            <a class="collapse-item" href="index.php?pag=<?php echo $menu3 ?>">Turmas</a>
                             <a class="collapse-item" href="index.php?pag=<?php echo $menu6 ?>">Salas</a>
-                            <a class="collapse-item" href="index.php?pag=<?php echo $menu5 ?>">Turmas</a>
+                            <a class="collapse-item" href="index.php?pag=<?php echo $menu7 ?>">Turmas</a>
 
                         </div>
                     </div>
@@ -167,7 +165,8 @@
                         <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
                             <i class="fa fa-bars"></i>
                         </button>
-                        <img class="mt-2" src="../img/logo-eduque.png" width="150">
+                        <img class="mt-2" src="../img/logo.png" width="150">
+                        <ln><?php echo $hoje ?></ln>
 
 
 
@@ -201,11 +200,9 @@
                         </ul>
 
                     </nav>
-
                     <!-- End of Topbar -->
 
                     <!-- Begin Page Content -->
-                    
                     <div class="container-fluid">
 
                         <?php if (@$pag == null) { 
@@ -276,8 +273,8 @@
                     <form id="form-perfil" method="POST" enctype="multipart/form-data">
                         <div class="modal-body">
 
-                          
-                        <div class="form-group">
+                           
+                                    <div class="form-group">
                                         <label >Nome</label>
                                         <input value="<?php echo $nome_usu ?>" type="text" class="form-control" id="nome_usu" name="nome_usu" placeholder="Nome">
                                     </div>
@@ -296,7 +293,7 @@
                                         <label >Senha</label>
                                         <input value="" type="password" class="form-control" id="senha_usu" name="senha_usu" placeholder="Senha">
                                     </div>
-                          
+                             
 
 
 
@@ -305,6 +302,8 @@
 
                                 </div>
                             </small>
+
+
 
                         </div>
                         <div class="modal-footer">
@@ -331,27 +330,28 @@
         <!-- Custom scripts for all pages-->
         <script src="../js/sb-admin-2.min.js"></script>
 
-        <!-- Page  plugins -->
+        <!-- Page level plugins -->
         <script src="../vendor/chart.js/Chart.min.js"></script>
 
-        <!-- Page  custom scripts -->
+        <!-- Page level custom scripts -->
         <script src="../js/demo/chart-area-demo.js"></script>
         <script src="../js/demo/chart-pie-demo.js"></script>
 
-        <!-- Page plugins -->
+        <!-- Page level plugins -->
         <script src="../vendor/datatables/jquery.dataTables.min.js"></script>
         <script src="../vendor/datatables/dataTables.bootstrap4.min.js"></script>
 
-        <!-- Page custom scripts -->
+        <!-- Page level custom scripts -->
         <script src="../js/demo/datatables-demo.js"></script>
 
-        <!-- Mascaras -->
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.11/jquery.mask.min.js"></script>
         <script src="../js/mascaras.js"></script>
 
     </body>
 
 </html>
+
+
 
 
 
@@ -372,11 +372,11 @@
                 $('#mensagem-perfil').removeClass()
 
                 if (mensagem.trim() == "Salvo com Sucesso!") {
-                    
+
                     //$('#nome').val('');
                     //$('#cpf').val('');
                     $('#btn-fechar-perfil').click();
-                    window.location = "index.php?";
+                    window.location = "index.php";
 
                 } else {
 
@@ -402,3 +402,6 @@
         });
     });
 </script>
+
+
+

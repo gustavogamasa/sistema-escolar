@@ -21,7 +21,7 @@ if($total_reg > 0){
 
 	$nivel = $res[0]['nivel'];
 
-	if($nivel == 'admin'){
+	if($nivel == 'Admin'){
 		echo "<script language='javascript'> window.location='painel-adm' </script>";
 	}
 
@@ -31,6 +31,14 @@ if($total_reg > 0){
 
 	if($nivel == 'secretaria'){
 		echo "<script language='javascript'> window.location='painel-secretaria' </script>";
+	}
+
+	if($nivel == 'aluno'){
+		echo "<script language='javascript'> window.location='painel-aluno' </script>";
+	}
+
+	if($nivel == 'tesoureiro'){
+		echo "<script language='javascript'> window.location='painel-tesoureiro' </script>";
 	}
 	
 }else{

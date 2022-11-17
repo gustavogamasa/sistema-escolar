@@ -12,14 +12,75 @@ $hoje = date('Y-m-d');
 $mes_atual = Date('m');
 $ano_atual = Date('Y');
 $dataInicioMes = $ano_atual."-".$mes_atual."-01";
+$numeroAlunos = 0;
+$numeroProfessores = 0;
+$numeroDisciplinas = 0;
+$numeroTurmas = 0;
+$numeroTurmasHoje = 0;
+$hoje = date('Y-m-d', time());
+$numeroMatriculasHoje = 0;
 
+$query = $pdo->query("Select * from alunos");
+$res = $query->fetchAll(PDO::FETCH_ASSOC);
+
+for ($i=0; $i < count($res); $i++) { 
+	foreach ($res[$i] as $key => $value) { $numeroAlunos = $i+1;
+	}
+	
+}
+
+$query = $pdo->query("Select * from professores");
+$res = $query->fetchAll(PDO::FETCH_ASSOC);
+
+for ($i=0; $i < count($res); $i++) { 
+	foreach ($res[$i] as $key => $value) { $numeroProfessores = $i+1;
+	}
+	
+}
+
+
+$query = $pdo->query("Select * from disciplinas");
+$res = $query->fetchAll(PDO::FETCH_ASSOC);
+
+for ($i=0; $i < count($res); $i++) { 
+	foreach ($res[$i] as $key => $value) { $numeroDisciplinas = $i+1;
+	}
+	
+}
+
+$query = $pdo->query("Select * from turmas");
+$res = $query->fetchAll(PDO::FETCH_ASSOC);
+
+for ($i=0; $i < count($res); $i++) { 
+	foreach ($res[$i] as $key => $value) {
+	$numeroTurmas = $i+1;
+	$dataCadastro = $res[$i]['data_cadastro'];
+	if($dataCadastro === $hoje) {$numeroTurmasHoje =+1;}
+	}
+	
+}
+
+$query = $pdo->query("Select * from alunos");
+$res = $query->fetchAll(PDO::FETCH_ASSOC);
+
+for ($i=0; $i < count($res); $i++) { 
+	foreach ($res[$i] as $key => $value) {
+	$numeroAlunos = $i+1;
+	$dataCadastro = $res[$i]['data_cadastro'];
+	$numero1 = 1;
+	if($dataCadastro === $hoje) {	}
+	}
+	
+}
 
 ?>
 
 
+
+
+
 <div class="row">
 	
-
 
 	<!-- Earnings (Monthly) Card Example -->
 	<div class="col-xl-3 col-md-6 mb-4">
@@ -27,8 +88,8 @@ $dataInicioMes = $ano_atual."-".$mes_atual."-01";
 			<div class="card-body">
 				<div class="row no-gutters align-items-center">
 					<div class="col mr-2">
-						<div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Vencimentos Dia</div>
-						<div class="h5 mb-0 font-weight-bold text-gray-800"><?php echo @$totalAprovados ?> </div>
+						<div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Turmas hoje</div>
+						<div class="h5 mb-0 font-weight-bold text-gray-800"><?php echo $numeroTurmasHoje  ?> </div>
 					</div>
 					<div class="col-auto" align="center">
 						<i class="fas fa-clipboard-list fa-2x text-primary"></i>
@@ -39,22 +100,44 @@ $dataInicioMes = $ano_atual."-".$mes_atual."-01";
 		</div>
 	</div>
 
-	<!-- Pending Requests Card Example -->
+
+
+
 	<div class="col-xl-3 col-md-6 mb-4">
-		<div class="card border-left-danger shadow h-100 py-2">
+		<div class="card border-left-success shadow h-100 py-2">
 			<div class="card-body">
 				<div class="row no-gutters align-items-center">
 					<div class="col mr-2">
-						<div class="text-xs font-weight-bold text-danger text-uppercase mb-1">Total Vencimentos R$</div>
-						<div class="h5 mb-0 font-weight-bold text-gray-800"><?php echo @$totalServPendentes ?></div>
+						<div class="text-xs font-weight-bold text-success text-uppercase mb-1">Matrículas do Dia</div>
+						<div class="h5 mb-0 font-weight-bold text-gray-800"><?php echo $numeroMatriculasHoje ?></div>
 					</div>
 					<div class="col-auto">
-						<i class="fas fa-clipboard-list fa-2x text-danger"></i>
+						<i class="fas fa-clipboard-list fa-2x text-success"></i>
 					</div>
 				</div>
 			</div>
 		</div>
 	</div>
+
+
+
+
+	<div class="col-xl-3 col-md-6 mb-4">
+		<div class="card border-left-primary shadow h-100 py-2">
+			<div class="card-body">
+				<div class="row no-gutters align-items-center">
+					<div class="col mr-2">
+						<div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Matrículas no Mês</div>
+						<div class="h5 mb-0 font-weight-bold text-gray-800"><?php echo @$totalServPendentes ?></div>
+					</div>
+					<div class="col-auto">
+						<i class="fas fa-clipboard-list fa-2x text-primary"></i>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
 </div>
 
 

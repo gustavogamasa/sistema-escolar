@@ -75,7 +75,8 @@ if(@$_SESSION['id_usuario'] == null || @$_SESSION['nivel_usuario'] != 'secretari
                        <a href="index.php?pag=<?php echo $pag ?>&funcao=endereco&id=<?php echo $id ?>" class='text-info mr-1' title='Ver Endereço'><i class='fas fa-home'></i></a>
                    </td>
                </tr>
-           <?php } ?>
+           <?php 
+        } ?>
 
 
 
@@ -368,7 +369,7 @@ if(@$_SESSION['id_usuario'] == null || @$_SESSION['nivel_usuario'] != 'secretari
 
                 <div class="col-md-5">
 
-                    <img src="../img/alunos/<?php echo $foto3 ?>" width="75%">
+                    <img src="../img/alunos/<?php echo $foto3 ?>" width="100%">
 
                 </div>
 

@@ -1,31 +1,20 @@
 <?php 
-
 $pag = "responsaveis";
-
 require_once("../conexao.php"); 
-@session_start();
 
+@session_start();
     //verificar se o usuário está autenticado
 if(@$_SESSION['id_usuario'] == null || @$_SESSION['nivel_usuario'] != 'secretaria'){
     echo "<script language='javascript'> window.location='../index.php' </script>";
 
 }
 
-function debug_to_console($data) {
-    $output = $data;
-    if (is_array($output))
-        $output = implode(',', $output);
-
-    echo "<script>console.log('Debug Objects: " . $output . "' );</script>";
-}
-
 
 ?>
 
 <div class="row mt-4 mb-4">
-
-    <a type="button" class="btn-info btn-sm ml-3 d-none d-md-block" href="index.php?pag=<?php echo $pag ?>&funcao=novo">Novo responsável</a>
-    <a type="button" class="btn-primary btn-sm ml-3 d-block d-sm-none" href="index.php?pag=<?php echo $pag ?>&funcao=novo">+</a>
+    <a type="button" class="btn-info btn-sm ml-3 d-none d-md-block" href="index.php?pag=<?php echo $pag ?>&funcao=novo">Novo Responsável</a>
+    <a type="button" class="btn-info btn-sm ml-3 d-block d-sm-none" href="index.php?pag=<?php echo $pag ?>&funcao=novo">+</a>
     
 </div>
 
@@ -43,7 +32,6 @@ function debug_to_console($data) {
                         <th>Telefone</th>
                         <th>Email</th>
                         <th>CPF</th>
-                       
                         <th>Ações</th>
                     </tr>
                 </thead>
@@ -62,45 +50,45 @@ function debug_to_console($data) {
                       $nome = $res[$i]['nome'];
                       $telefone = $res[$i]['telefone'];
                       $email = $res[$i]['email'];
-                      $cpf = $res[$i]['cpf'];
                       $endereco = $res[$i]['endereco'];
-                      
+                      $cpf = $res[$i]['cpf'];
                       $id = $res[$i]['id'];
 
-                       
+
                       ?>
 
 
-                    <tr>
+                      <tr>
                         <td><?php echo $nome ?></td>
                         <td><?php echo $telefone ?></td>
                         <td><?php echo $email ?></td>
                         <td><?php echo $cpf ?></td>
-                       
+
 
                         <td>
-                             <a href="index.php?pag=<?php echo $pag ?>&funcao=editar&id=<?php echo $id ?>" class='text-primary mr-1' title='Editar Dados'><i class='far fa-edit'></i></a>
-                             <a href="index.php?pag=<?php echo $pag ?>&funcao=excluir&id=<?php echo $id ?>" class='text-danger mr-1' title='Excluir Registro'><i class='far fa-trash-alt'></i></a>
-                             <a href="index.php?pag=<?php echo $pag ?>&funcao=endereco&id=<?php echo $id ?>" class='text-info mr-1' title='Ver Endereço'><i class='fas fa-home'></i></a>
-                        </td>
-                    </tr>
-<?php } ?>
+                         <a href="index.php?pag=<?php echo $pag ?>&funcao=editar&id=<?php echo $id ?>" class='text-primary mr-1' title='Editar Dados'><i class='far fa-edit'></i></a>
+                         <a href="index.php?pag=<?php echo $pag ?>&funcao=excluir&id=<?php echo $id ?>" class='text-danger mr-1' title='Excluir Registro'><i class='far fa-trash-alt'></i></a>
+
+                         <a href="index.php?pag=<?php echo $pag ?>&funcao=endereco&id=<?php echo $id ?>" class='text-info mr-1' title='Ver Endereço'><i class='fas fa-home'></i></a>
+                     </td>
+                 </tr>
+             <?php } ?>
 
 
 
 
 
-                </tbody>
-            </table>
-        </div>
-    </div>
+         </tbody>
+     </table>
+ </div>
+</div>
 </div>
 
 
 
 
 
-<!-- Modal EDITAR -->
+<!-- Modal -->
 <div class="modal fade" id="modalDados" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -113,14 +101,13 @@ function debug_to_console($data) {
                     $query = $pdo->query("SELECT * FROM responsaveis where id = '" . $id2 . "' ");
                     $res = $query->fetchAll(PDO::FETCH_ASSOC);
 
-                      $nome2 = $res[0]['nome'];
-                      $telefone2 = $res[0]['telefone'];
-                      $email2 = $res[0]['email'];
-                      $cpf2 = $res[0]['cpf'];
-                      $endereco2 = $res[0]['endereco'];
-                      
-                  
-                                                            
+                    $nome2 = $res[0]['nome'];
+                    $telefone2 = $res[0]['telefone'];
+                    $email2 = $res[0]['email'];
+                    $endereco2 = $res[0]['endereco'];
+                    $cpf2 = $res[0]['cpf'];
+
+
 
                 } else {
                     $titulo = "Inserir Registro";
@@ -131,11 +118,8 @@ function debug_to_console($data) {
                 ?>
                 
                 <h5 class="modal-title" id="exampleModalLabel"><?php echo $titulo ?></h5>
-
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-
                     <span aria-hidden="true">&times;</span>
-                    
                 </button>
             </div>
             <form id="form" method="POST">
@@ -145,53 +129,64 @@ function debug_to_console($data) {
                         <label >Nome</label>
                         <input value="<?php echo @$nome2 ?>" type="text" class="form-control" id="nome" name="nome" placeholder="Nome">
                     </div>
-                    <div class="form-group">
-                        <label >Telefone</label>
-                        <input value="<?php echo @$telefone2 ?>" type="text" class="form-control" id="telefone" name="telefone" placeholder="Telefone">
-                    </div>
-                    <div class="form-group">
-                        <label >Email</label>
-                        <input value="<?php echo @$email2 ?>" type="text" class="form-control" id="email" name="email" placeholder="Email">
-                    </div>
+
                     <div class="form-group">
                         <label >CPF</label>
                         <input value="<?php echo @$cpf2 ?>" type="text" class="form-control" id="cpf" name="cpf" placeholder="CPF">
                     </div>
-                    <div class="form-group">
-                        <label >Endereço</label>
-                        <input value="<?php echo @$endereco2 ?>" type="text" class="form-control" id="endereco" name="endereco" placeholder="Endereço">
+
+                    <div class="row">
+                        <div class="col-md-6">
+                           <div class="form-group">
+                            <label >Telefone</label>
+                            <input value="<?php echo @$telefone2 ?>" type="text" class="form-control" id="telefone" name="telefone" placeholder="Telefone">
+                        </div>
                     </div>
 
-                  
-                   
+                    <div class="col-md-6">
+                       <div class="form-group">
+                        <label >Email</label>
+                        <input value="<?php echo @$email2 ?>" type="text" class="form-control" id="email" name="email" placeholder="Email">
+                    </div>
+                </div>
+            </div>
 
-                    <small>
-                        <div id="mensagem">
+            
 
-                        </div>
-                    </small> 
+            
+
+            <div class="form-group">
+                <label >Endereço</label>
+                <input value="<?php echo @$endereco2 ?>" type="text" class="form-control" id="endereco" name="endereco" placeholder="Endereço">
+            </div>
+
+
+
+
+            <small>
+                <div id="mensagem">
 
                 </div>
+            </small> 
 
-
-
-                <div class="modal-footer">
-
-
-
-                <input value="<?php echo @$_GET['id'] ?>" type="hidden" name="txtid2" id="txtid2">
-                <!-- input do CPF para verificar duplicidade -->
-                <input value="<?php echo @$cpf2 ?>" type="hidden" name="antigo" id="antigo">
-                <input value="<?php echo @$email2 ?>" type="hidden" name="antigo2" id="antigo2">
-                
-
-                    <button type="button" id="btn-fechar" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-                    <button type="submit" name="btn-salvar" id="btn-salvar" class="btn btn-primary">Salvar</button>
-
-                </div>
-            </form>
         </div>
-    </div>
+
+
+
+        <div class="modal-footer">
+
+
+
+            <input value="<?php echo @$_GET['id'] ?>" type="hidden" name="txtid2" id="txtid2">
+            <input value="<?php echo @$cpf2 ?>" type="hidden" name="antigo" id="antigo">
+            <input value="<?php echo @$email2 ?>" type="hidden" name="antigo2" id="antigo2">
+
+            <button type="button" id="btn-fechar" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+            <button type="submit" name="btn-salvar" id="btn-salvar" class="btn btn-primary">Salvar</button>
+        </div>
+    </form>
+</div>
+</div>
 </div>
 
 
@@ -231,98 +226,94 @@ function debug_to_console($data) {
 </div>
 
 
-<!-- MODAL PARA MOSTRAR O ENDEREÇO -->
+
+
 
 
 <div class="modal" id="modal-endereco" tabindex="-1" role="dialog">
-	<div class="modal-dialog" role="document">
-		<div class="modal-content">
-			<div class="modal-header">
-				<h5 class="modal-title">Dados do responsável</h5>
-				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-					<span aria-hidden="true">&times;</span>
-				</button>
-			</div>
-			<div class="modal-body">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Dados do Responsável</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
 
-				<?php 
-				if (@$_GET['funcao'] == 'endereco') {
-
-                  
-					
-					$id2 = $_GET['id'];
-
-					$query = $pdo->query("SELECT * FROM responsaveis where id = '$id2' ");
-					$res = $query->fetchAll(PDO::FETCH_ASSOC);
-					$nome3 = $res[0]['nome'];
-					$cpf3 = $res[0]['cpf'];
-					$telefone3 = $res[0]['telefone'];
-					$email3 = $res[0]['email'];
-					$endereco3 = $res[0]['endereco'];
-
-                   
-					
-				} 
-
-              
-				?>
-
-				<span><b>Nome: </b> <i><?php echo $nome3 ?></i><br>
-				<span><b>Telefone: </b> <i><?php echo $telefone3 ?></i> <span class="ml-4"><b>CPF: </b> <i><?php echo $cpf3 ?></i><br>
-				<span><b>Email: </b> <i><?php echo $email3 ?><br>
-				<span><b>Endereço: </b> <i><?php echo $endereco3 ?><br>
-              
-
-               
-
-			</div>
-			
-		</div>
-	</div>
-</div>
-
-
-<?php 
-
-if (@$_GET["funcao"] != null && @$_GET["funcao"] == "novo") {
-    echo "<script>$('#modalDados').modal('show');</script>";
-}
-
-if (@$_GET["funcao"] != null && @$_GET["funcao"] == "editar") {
-    echo "<script>$('#modalDados').modal('show');</script>";
-}
-
-if (@$_GET["funcao"] != null && @$_GET["funcao"] == "excluir") {
-    echo "<script>$('#modal-deletar').modal('show');</script>";
-}
-
-if (@$_GET["funcao"] != null && @$_GET["funcao"] == "endereco") {
-    echo "<script>$('#modal-endereco').modal('show');</script>"; 
-}
-
-?>
-
-
-
-
-<!--AJAX PARA INSERÇÃO E EDIÇÃO DOS DADOS COM IMAGEM -->
-<script type="text/javascript">
-    $("#form").submit(function () {
-        var pag = "<?=$pag?>";
-        event.preventDefault();
-        var formData = new FormData(this);
-
-        $.ajax({
-            url: pag + "/inserir.php",
-            type: 'POST',
-            data: formData,
-
-            success: function (mensagem) {
-
-                $('#mensagem').removeClass()
-
-                if (mensagem.trim() == "Salvo com Sucesso!") {
+                <?php 
+                if (@$_GET['funcao'] == 'endereco') {
                     
+                    $id2 = $_GET['id'];
+
+                    $query = $pdo->query("SELECT * FROM responsaveis where id = '$id2' ");
+                    $res = $query->fetchAll(PDO::FETCH_ASSOC);
+                    $nome3 = $res[0]['nome'];
+                    $cpf3 = $res[0]['cpf'];
+                    $telefone3 = $res[0]['telefone'];
+                    $email3 = $res[0]['email'];
+                    $endereco3 = $res[0]['endereco'];
+                    
+                } 
+
+
+                ?>
+
+                <span><b>Nome: </b> <i><?php echo $nome3 ?></i><br>
+                    <span><b>Telefone: </b> <i><?php echo $telefone3 ?></i> <span class="ml-4"><b>CPF: </b> <i><?php echo $cpf3 ?></i><br>
+                        <span><b>Email: </b> <i><?php echo $email3 ?><br>
+                            <span><b>Endereço: </b> <i><?php echo $endereco3 ?><br>
+
+                            </div>
+                            
+                        </div>
+                    </div>
+                </div>
+
+
+
+
+                <?php 
+
+                if (@$_GET["funcao"] != null && @$_GET["funcao"] == "novo") {
+                    echo "<script>$('#modalDados').modal('show');</script>";
+                }
+
+                if (@$_GET["funcao"] != null && @$_GET["funcao"] == "editar") {
+                    echo "<script>$('#modalDados').modal('show');</script>";
+                }
+
+                if (@$_GET["funcao"] != null && @$_GET["funcao"] == "excluir") {
+                    echo "<script>$('#modal-deletar').modal('show');</script>";
+                }
+
+                if (@$_GET["funcao"] != null && @$_GET["funcao"] == "endereco") {
+                    echo "<script>$('#modal-endereco').modal('show');</script>";
+                }
+
+                ?>
+
+
+
+
+                <!--AJAX PARA INSERÇÃO E EDIÇÃO DOS DADOS COM IMAGEM -->
+                <script type="text/javascript">
+                    $("#form").submit(function () {
+                        var pag = "<?=$pag?>";
+                        event.preventDefault();
+                        var formData = new FormData(this);
+
+                        $.ajax({
+                            url: pag + "/inserir.php",
+                            type: 'POST',
+                            data: formData,
+
+                            success: function (mensagem) {
+
+                                $('#mensagem').removeClass()
+
+                                if (mensagem.trim() == "Salvo com Sucesso!") {
+
                     //$('#nome').val('');
                     //$('#cpf').val('');
                     $('#btn-fechar').click();
@@ -350,140 +341,83 @@ if (@$_GET["funcao"] != null && @$_GET["funcao"] == "endereco") {
                 return myXhr;
             }
         });
-    });
-</script>
+                    });
+                </script>
 
 
 
 
 
-<!--AJAX PARA EXCLUSÃO DOS DADOS -->
-<script type="text/javascript">
-    $(document).ready(function () {
-        var pag = "<?=$pag?>";
-        $('#btn-deletar').click(function (event) {
-            event.preventDefault();
+                <!--AJAX PARA EXCLUSÃO DOS DADOS -->
+                <script type="text/javascript">
+                    $(document).ready(function () {
+                        var pag = "<?=$pag?>";
+                        $('#btn-deletar').click(function (event) {
+                            event.preventDefault();
 
-            $.ajax({
-                url: pag + "/excluir.php",
-                method: "post",
-                data: $('form').serialize(),
-                dataType: "text",
-                success: function (mensagem) {
+                            $.ajax({
+                                url: pag + "/excluir.php",
+                                method: "post",
+                                data: $('form').serialize(),
+                                dataType: "text",
+                                success: function (mensagem) {
 
-                    if (mensagem.trim() === 'Excluído com Sucesso!') {
+                                    if (mensagem.trim() === 'Excluído com Sucesso!') {
 
 
-                        $('#btn-cancelar-excluir').click();
-                        window.location = "index.php?pag=" + pag;
+                                        $('#btn-cancelar-excluir').click();
+                                        window.location = "index.php?pag=" + pag;
+                                    }
+
+                                    $('#mensagem_excluir').text(mensagem)
+
+
+
+                                },
+
+                            })
+                        })
+                    })
+                </script>
+
+
+
+                <!--SCRIPT PARA CARREGAR IMAGEM -->
+                <script type="text/javascript">
+
+                    function carregarImg() {
+
+                        var target = document.getElementById('target');
+                        var file = document.querySelector("input[type=file]").files[0];
+                        var reader = new FileReader();
+
+                        reader.onloadend = function () {
+                            target.src = reader.result;
+                        };
+
+                        if (file) {
+                            reader.readAsDataURL(file);
+
+
+                        } else {
+                            target.src = "";
+                        }
                     }
 
-                    $('#mensagem_excluir').text(mensagem)
-
-
-
-                },
-
-            })
-        })
-    })
-</script>
+                </script>
 
 
 
 
 
+                <script type="text/javascript">
+                    $(document).ready(function () {
+                        $('#dataTable').dataTable({
+                            "ordering": false
+                        })
 
+                    });
+                </script>
 
-
-<!--SCRIPT PARA CARREGAR IMAGEM -->
-<script type="text/javascript">
-
-    function carregarImg() {
-
-        var target = document.getElementById('target');
-        var file = document.querySelector("input[type=file]").files[0];
-        var reader = new FileReader();
-
-        reader.onloadend = function () {
-            target.src = reader.result;
-        };
-
-        if (file) {
-            reader.readAsDataURL(file);
-
-
-        } else {
-            target.src = "";
-        }
-    }
-
-</script>
-
-
-
-
-
-<script type="text/javascript">
-    
-    $(document).ready(function () {
-        $('#dataTable').dataTable({
-            "ordering": false
-        })
-
-    });
-
-</script>
-
-
-<!-- MODAL PARA MOSTRAR O ENDEREÇO -->
-
-
-<div class="modal" id="modal-endereco" tabindex="-1" role="dialog">
-	<div class="modal-dialog" role="document">
-		<div class="modal-content">
-			<div class="modal-header">
-				<h5 class="modal-title">Dados do tesoureiro</h5>
-				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-					<span aria-hidden="true">&times;</span>
-				</button>
-			</div>
-			<div class="modal-body">
-
-				<?php 
-				if (@$_GET['funcao'] == 'endereco') {
-
-                  
-					
-					$id2 = $_GET['id'];
-
-					$query = $pdo->query("SELECT * FROM responsaveis where id = '$id2' ");
-					$res = $query->fetchAll(PDO::FETCH_ASSOC);
-					$nome3 = $res[0]['nome'];
-					$cpf3 = $res[0]['cpf'];
-					$telefone3 = $res[0]['telefone'];
-					$email3 = $res[0]['email'];
-					$endereco3 = $res[0]['endereco'];
-
-                   
-					
-				} 
-
-              
-				?>
-
-				<span><b>Nome: </b> <i><?php echo $nome3 ?></i><br>
-				<span><b>Telefone: </b> <i><?php echo $telefone3 ?></i> <span class="ml-4"><b>CPF: </b> <i><?php echo $cpf3 ?></i><br>
-				<span><b>Email: </b> <i><?php echo $email3 ?><br>
-				<span><b>Endereço: </b> <i><?php echo $endereco3 ?><br>
-              
-
-               
-
-			</div>
-			
-		</div>
-	</div>
-</div>
 
 
