@@ -36,7 +36,7 @@ $idUsuario = @$res[0]['id'];
         <meta name="description" content="">
         <meta name="author" content="Hugo Vasconcelos">
 
-        <title>Painel Secretária</title>
+        <title>Painel Secretaria</title>
 
         <!-- Custom fonts for this template-->
         <link href="../vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -69,7 +69,7 @@ $idUsuario = @$res[0]['id'];
                 <!-- Sidebar - Brand -->
                 <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.php">
 
-                    <div class="sidebar-brand-text mx-3">Secretária</div>
+                    <div class="sidebar-brand-text mx-3">Secretaria</div>
                 </a>
 
                 <!-- Divider -->
