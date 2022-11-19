@@ -55,7 +55,7 @@ if($id == ""){
 
 	$res2 = $pdo->prepare("INSERT INTO usuarios SET nome = :nome, cpf = :cpf, email = :email, senha = :senha, nivel = :nivel");	
 	$res2->bindValue(":senha", '123');
-	$res2->bindValue(":nivel", 'secretaria');
+	$res2->bindValue(":nivel", 'tesoureiro');
 
 }else{
 	$res = $pdo->prepare("UPDATE tesoureiros SET nome = :nome, cpf = :cpf, email = :email, endereco = :endereco, telefone = :telefone WHERE id = '$id'");

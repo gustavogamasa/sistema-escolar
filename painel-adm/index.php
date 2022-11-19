@@ -11,7 +11,6 @@
     $menu5 = "disciplinas";
     $menu6 = "salas";
     $menu7 = "turmas";
-    $menu8 = "matriculas";
 
 
     //RECUPERAR DADOS DO USUÁRIO
@@ -117,7 +116,6 @@ $idUsuario = @$res[0]['id'];
                             <a class="collapse-item" href="index.php?pag=<?php echo $menu5 ?>">Disciplinas</a>
                             <a class="collapse-item" href="index.php?pag=<?php echo $menu6 ?>">Salas</a>
                             <a class="collapse-item" href="index.php?pag=<?php echo $menu7 ?>">Turmas</a>
-                            <a class="collapse-item" href="index.php?pag=<?php echo $menu8 ?>">Matrículas</a>
 
                         </div>
                     </div>
@@ -126,21 +124,7 @@ $idUsuario = @$res[0]['id'];
                 <!-- Divider -->
                 <hr class="sidebar-divider">
 
-                <!-- Heading -->
-                <div class="sidebar-heading">
-                    Consultas
-                </div>
-
-
-
-                <!-- Nav Item - Charts -->
-                <li class="nav-item">
-                    <a class="nav-link" href="index.php?pag=<?php echo $menu6 ?>">
-                        <i class="fas fa-fw fa-chart-area"></i>
-                        <span>Menu 6</span></a>
-                </li>
-
-                <!-- Nav Item - Tables -->
+              
               
 
                 <!-- Divider -->
