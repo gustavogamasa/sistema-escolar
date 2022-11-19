@@ -11,6 +11,7 @@ if (@$_FILES['imagem']['name'] == ""){
     $imagem = $nome_img;
 }
 
+
 $imagem_temp = @$_FILES['imagem']['tmp_name']; 
 $ext = pathinfo($imagem, PATHINFO_EXTENSION);   
 if($ext == 'png' or $ext == 'jpg' or $ext == 'jpeg' or $ext == 'gif' or $ext == 'pdf'){ 

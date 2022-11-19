@@ -13,7 +13,50 @@ $mes_atual = Date('m');
 $ano_atual = Date('Y');
 $dataInicioMes = $ano_atual."-".$mes_atual."-01";
 
+
+
+$query = $pdo->query("SELECT * FROM contas_pagar where data_venc = curDate()");
+$res = $query->fetchAll(PDO::FETCH_ASSOC);
+$vencimentosDia = @count($res);
+$total_vencimento_dia = 0;
+for ($i=0; $i < @count($res); $i++) { 
+	foreach ($res[$i] as $key => $value) {
+	}
+	$total_vencimento_dia = $total_vencimento_dia + $res[$i]['valor'];
+}
+$total_vencimento_dia = number_format($total_vencimento_dia, 2, ',', '.');
+
+
+
+$query = $pdo->query("SELECT * FROM matriculas where data = curDate()");
+$res = $query->fetchAll(PDO::FETCH_ASSOC);
+$matriculasDia = @count($res);
+
+
+$query = $pdo->query("SELECT * FROM matriculas where data >= '$dataInicioMes' and data <= curDate()");
+$res = $query->fetchAll(PDO::FETCH_ASSOC);
+$matriculasMes = @count($res);
+
+
+$query = $pdo->query("SELECT * FROM alunos");
+$res = $query->fetchAll(PDO::FETCH_ASSOC);
+$alunosCadastrados = @count($res);
+
+$query = $pdo->query("SELECT * FROM professores");
+$res = $query->fetchAll(PDO::FETCH_ASSOC);
+$totalProf = @count($res);
+
+$query = $pdo->query("SELECT * FROM turmas");
+$res = $query->fetchAll(PDO::FETCH_ASSOC);
+$totalTurmas = @count($res);
+
+$query = $pdo->query("SELECT * FROM disciplinas");
+$res = $query->fetchAll(PDO::FETCH_ASSOC);
+$totalDisc = @count($res);
+
 ?>
+
+
 
 
 
@@ -29,7 +72,7 @@ $dataInicioMes = $ano_atual."-".$mes_atual."-01";
 				<div class="row no-gutters align-items-center">
 					<div class="col mr-2">
 						<div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Vencimentos Dia</div>
-						<div class="h5 mb-0 font-weight-bold text-gray-800"><?php echo @$totalAprovados ?> </div>
+						<div class="h5 mb-0 font-weight-bold text-gray-800"><?php echo @$vencimentosDia ?> </div>
 					</div>
 					<div class="col-auto" align="center">
 						<i class="fas fa-clipboard-list fa-2x text-primary"></i>
@@ -47,7 +90,7 @@ $dataInicioMes = $ano_atual."-".$mes_atual."-01";
 				<div class="row no-gutters align-items-center">
 					<div class="col mr-2">
 						<div class="text-xs font-weight-bold text-danger text-uppercase mb-1">Total Vencimento R$</div>
-						<div class="h5 mb-0 font-weight-bold text-gray-800"><?php echo @$totalServPendentes ?></div>
+						<div class="h5 mb-0 font-weight-bold text-gray-800"><?php echo @$total_vencimento_dia ?></div>
 					</div>
 					<div class="col-auto">
 						<i class="fas fa-clipboard-list fa-2x text-danger"></i>
@@ -63,7 +106,7 @@ $dataInicioMes = $ano_atual."-".$mes_atual."-01";
 				<div class="row no-gutters align-items-center">
 					<div class="col mr-2">
 						<div class="text-xs font-weight-bold text-success text-uppercase mb-1">Matrículas do Dia</div>
-						<div class="h5 mb-0 font-weight-bold text-gray-800"><?php echo @$totalServPendentes ?></div>
+						<div class="h5 mb-0 font-weight-bold text-gray-800"><?php echo @$matriculasDia ?></div>
 					</div>
 					<div class="col-auto">
 						<i class="fas fa-clipboard-list fa-2x text-success"></i>
@@ -80,7 +123,7 @@ $dataInicioMes = $ano_atual."-".$mes_atual."-01";
 				<div class="row no-gutters align-items-center">
 					<div class="col mr-2">
 						<div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Matrículas no Mês</div>
-						<div class="h5 mb-0 font-weight-bold text-gray-800"><?php echo @$totalServPendentes ?></div>
+						<div class="h5 mb-0 font-weight-bold text-gray-800"><?php echo @$matriculasMes ?></div>
 					</div>
 					<div class="col-auto">
 						<i class="fas fa-clipboard-list fa-2x text-primary"></i>
@@ -106,7 +149,7 @@ $dataInicioMes = $ano_atual."-".$mes_atual."-01";
 				<div class="row no-gutters align-items-center">
 					<div class="col mr-2">
 						<div class="text-xs font-weight-bold text-info text-uppercase mb-1">Alunos Cadastrados</div>
-						<div class="h5 mb-0 font-weight-bold text-gray-800"><?php echo @$totalAlunos ?></div>
+						<div class="h5 mb-0 font-weight-bold text-gray-800"><?php echo @$alunosCadastrados ?></div>
 					</div>
 					<div class="col-auto">
 						<i class="fas fa-users fa-2x text-info"></i>

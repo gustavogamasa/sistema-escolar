@@ -7,10 +7,10 @@
     $menu1 = "alunos";
     $menu2 = "responsaveis";
     $menu3 = "turmas";
-    $menu4 = "funcionarios";
-    $menu5 = "disciplinas";
-    $menu6 = "salas";
-    $menu7 = "matriculas";
+    $menu4 = "";
+    $menu5 = "";
+    $menu6 = "";
+    $menu7 = "";
 
 
     //RECUPERAR DADOS DO USUÁRIO
@@ -36,7 +36,7 @@ $idUsuario = @$res[0]['id'];
         <meta name="description" content="">
         <meta name="author" content="Hugo Vasconcelos">
 
-        <title>Painel Secretaria</title>
+        <title>Painel Secretária</title>
 
         <!-- Custom fonts for this template-->
         <link href="../vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -69,7 +69,7 @@ $idUsuario = @$res[0]['id'];
                 <!-- Sidebar - Brand -->
                 <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.php">
 
-                    <div class="sidebar-brand-text mx-3">Secretaria</div>
+                    <div class="sidebar-brand-text mx-3">Secretária</div>
                 </a>
 
                 <!-- Divider -->
@@ -87,57 +87,28 @@ $idUsuario = @$res[0]['id'];
 
 
 
-                <li class="nav-item">
-                    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
-                        <i class="fas fa-users"></i>
-                        <span>Pessoas</span>
-                    </a>
-                    <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
-                        <div class="bg-white py-2 collapse-inner rounded">
-                            
-                            <a class="collapse-item" href="index.php?pag=<?php echo $menu1 ?>">Alunos</a>
-                            <a class="collapse-item" href="index.php?pag=<?php echo $menu2 ?>">Responsável</a>
-
-                             
-                        </div>
-                    </div>
-                </li>
-
-                <!-- Nav Item - Utilities Collapse Menu -->
-                <li class="nav-item">
-                    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities" aria-expanded="true" aria-controls="collapseUtilities">
-                        <i class="fas fa-home"></i>
-                        <span>Turmas / Matrículas</span>
-                    </a>
-                    <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
-                        <div class="bg-white py-2 collapse-inner rounded">
-                           
-                            <a class="collapse-item" href="index.php?pag=<?php echo $menu3 ?>">Turmas</a>
-                            <a class="collapse-item" href="index.php?pag=<?php echo $menu6 ?>">Salas</a>
-                            <a class="collapse-item" href="index.php?pag=<?php echo $menu7 ?>">Matrículas</a>
-
-                        </div>
-                    </div>
-                </li>
-
-                <!-- Divider -->
-                <hr class="sidebar-divider">
-
-                <!-- Heading -->
-                <div class="sidebar-heading">
-                    Consultas
-                </div>
-
-
-
                 <!-- Nav Item - Charts -->
                 <li class="nav-item">
-                    <a class="nav-link" href="index.php?pag=<?php echo $menu6 ?>">
+                    <a class="nav-link" href="index.php?pag=<?php echo $menu1 ?>">
                         <i class="fas fa-fw fa-chart-area"></i>
-                        <span>Menu 6</span></a>
+                        <span>Alunos</span></a>
                 </li>
 
-                <!-- Nav Item - Tables -->
+                 <!-- Nav Item - Charts -->
+                <li class="nav-item">
+                    <a class="nav-link" href="index.php?pag=<?php echo $menu2 ?>">
+                        <i class="fas fa-fw fa-chart-area"></i>
+                        <span>Responsável</span></a>
+                </li>
+
+                 <!-- Nav Item - Charts -->
+                <li class="nav-item">
+                    <a class="nav-link" href="index.php?pag=<?php echo $menu3 ?>">
+                        <i class="fas fa-fw fa-chart-area"></i>
+                        <span>Turmas</span></a>
+                </li>
+
+               
               
 
                 <!-- Divider -->
