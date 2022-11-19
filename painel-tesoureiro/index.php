@@ -98,7 +98,7 @@ $idUsuario = @$res[0]['id'];
                             <a class="collapse-item" href="index.php?pag=<?php echo $menu1 ?>">Matrículas</a>
                             <a class="collapse-item" href="index.php?pag=<?php echo $menu2 ?>">Mensalidades</a>
 
-                            <a class="collapse-item" href="index.php?pag=<?php echo $menu3 ?>">Contas à Pagar</a>
+
 
                              
                         </div>

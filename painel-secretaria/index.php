@@ -10,7 +10,7 @@
     $menu4 = "funcionarios";
     $menu5 = "disciplinas";
     $menu6 = "salas";
-    $menu7 = "turmas";
+    $menu7 = "matriculas";
 
 
     //RECUPERAR DADOS DO USUÁRIO
@@ -114,7 +114,7 @@ $idUsuario = @$res[0]['id'];
                            
                             <a class="collapse-item" href="index.php?pag=<?php echo $menu3 ?>">Turmas</a>
                             <a class="collapse-item" href="index.php?pag=<?php echo $menu6 ?>">Salas</a>
-                            <a class="collapse-item" href="index.php?pag=<?php echo $menu7 ?>">Turmas</a>
+                            <a class="collapse-item" href="index.php?pag=<?php echo $menu7 ?>">Matrículas</a>
 
                         </div>
                     </div>

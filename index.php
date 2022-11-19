@@ -105,7 +105,7 @@ if($total_reg == 0){
 			<input class="input" type="password" name="senha" placeholder="Senha" required="required" />
 			<button type="submit" class="btn btn-light btn-block btn-large">Logar</button>
 			<div align="center" class="mt-2">
-				<small><a href="" data-toggle="modal" data-target="#modalRecuperar" title="Clique para Recuperar sua Senha" class="text-light">Recuperar Senha?</a></small>
+				<small><a href="" data-toggle="modal" data-target="#modalRecuperar" title="Clique para Recuperar sua Senha" class="text-light"></a></small>
 			</div>
 		</form>
 	</div>
