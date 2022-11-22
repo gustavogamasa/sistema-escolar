@@ -34,7 +34,7 @@ $idUsuario = @$res[0]['id'];
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <meta name="description" content="">
-        <meta name="author" content="Hugo Vasconcelos">
+        <meta name="author" content="Gustavo Amaral - RA 1942346-5">
 
         <title>Painel Administrativo</title>
 
@@ -151,7 +151,7 @@ $idUsuario = @$res[0]['id'];
                         <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
                             <i class="fa fa-bars"></i>
                         </button>
-                        <img class="mt-2" src="../img/logo.png" width="150">
+                        <img class="mt-2" src="../img/logo.png" width="130">
 
 
 

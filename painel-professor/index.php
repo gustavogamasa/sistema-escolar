@@ -4,13 +4,13 @@
 
     //variaveis para o menu
     $pag = @$_GET["pag"];
-    $menu1 = "alunos";
-    $menu2 = "responsaveis";
-    $menu3 = "turmas";
-    $menu4 = "";
-    $menu5 = "";
-    $menu6 = "";
-    $menu7 = "";
+    $menu1 = "matriculas";
+    $menu2 = "mensalidades";
+    $menu3 = "pagar";
+    $menu4 = "funcionarios";
+    $menu5 = "disciplinas";
+    $menu6 = "salas";
+    $menu7 = "turmas";
 
 
     //RECUPERAR DADOS DO USUÁRIO
@@ -34,9 +34,9 @@ $idUsuario = @$res[0]['id'];
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <meta name="description" content="">
-        <meta name="author" content="Gustavo Amaral - RA 1942346-5">
+        <meta name="author" content="Hugo Vasconcelos">
 
-        <title>Painel Secretaria</title>
+        <title>Painel Professor</title>
 
         <!-- Custom fonts for this template-->
         <link href="../vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -69,7 +69,7 @@ $idUsuario = @$res[0]['id'];
                 <!-- Sidebar - Brand -->
                 <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.php">
 
-                    <div class="sidebar-brand-text mx-3">Secretaria</div>
+                    <div class="sidebar-brand-text mx-3">Professor</div>
                 </a>
 
                 <!-- Divider -->
@@ -82,37 +82,50 @@ $idUsuario = @$res[0]['id'];
 
                 <!-- Heading -->
                 <div class="sidebar-heading">
-                    Cadastros
+                    TURMAS EM ANDAMENTO
                 </div>
 
+                <?php 
 
+$query = $pdo->query("SELECT * FROM professores where cpf = '$cpf_usu' ");
+$res = $query->fetchAll(PDO::FETCH_ASSOC);
+$id_prof = $res[0]['id'];
+
+
+
+                    $query = $pdo->query("SELECT * FROM turmas where professor = '$id_prof' and data_final > curDate() order by data_final desc");
+                    $res = $query->fetchAll(PDO::FETCH_ASSOC);
+                     for ($i=0; $i < count($res); $i++) { 
+                  foreach ($res[$i] as $key => $value) {
+                  }
+                    $disciplina = $res[$i]['disciplina'];
+                    
+                    $id_turma = $res[$i]['id'];
+
+                   
+                    $query_resp = $pdo->query("SELECT * FROM disciplinas where id = '$disciplina' ");
+                    $res_resp = $query_resp->fetchAll(PDO::FETCH_ASSOC);
+                    
+                    $nome_disc = $res_resp[0]['nome'];
+
+
+                   
+ ?> 
 
                 <!-- Nav Item - Charts -->
                 <li class="nav-item">
-                    <a class="nav-link" href="index.php?pag=<?php echo $menu1 ?>">
+                    <a class="nav-link" href="index.php?pag=turma&id=<?php echo $id_turma ?>">
                         <i class="fas fa-fw fa-chart-area"></i>
-                        <span>Alunos</span></a>
+                        <span><?php echo $nome_disc ?></span></a>
                 </li>
 
-                 <!-- Nav Item - Charts -->
-                <li class="nav-item">
-                    <a class="nav-link" href="index.php?pag=<?php echo $menu2 ?>">
-                        <i class="fas fa-fw fa-chart-area"></i>
-                        <span>Responsável</span></a>
-                </li>
-
-                 <!-- Nav Item - Charts -->
-                <li class="nav-item">
-                    <a class="nav-link" href="index.php?pag=<?php echo $menu3 ?>">
-                        <i class="fas fa-fw fa-chart-area"></i>
-                        <span>Turmas</span></a>
-                </li>
-
-               
+                <!-- Nav Item - Tables -->
               
 
                 <!-- Divider -->
                 <hr class="sidebar-divider d-none d-md-block">
+
+            <?php } ?>
 
                 <!-- Sidebar Toggler (Sidebar) -->
                 <div class="text-center d-none d-md-inline">
@@ -135,7 +148,7 @@ $idUsuario = @$res[0]['id'];
                         <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
                             <i class="fa fa-bars"></i>
                         </button>
-                        <img class="mt-2" src="../img/logo.png" width="130">
+                        <img class="mt-2" src="../img/logo.png" width="150">
 
 
 
@@ -196,6 +209,11 @@ $idUsuario = @$res[0]['id'];
                         @include_once(@$menu6.".php");
 
                        
+                       } else if (@$pag=='turma') {
+                        @include_once("turma.php");
+
+                         } else if (@$pag=='periodos') {
+                        @include_once("periodos.php");
                         
                         } else {
                         @include_once("home.php");

@@ -7,7 +7,7 @@ $cpf_usuario = @$_SESSION['cpf_usuario'];
     //verificar se o usuário está autenticado
 if(@$_SESSION['id_usuario'] == null || @$_SESSION['nivel_usuario'] != 'tesoureiro'){
     echo "<script language='javascript'> window.location='../index.php' </script>";
-    exit();
+
 }
 
 
@@ -312,20 +312,6 @@ if(@$_SESSION['id_usuario'] == null || @$_SESSION['nivel_usuario'] != 'tesoureir
             </div>
             <div class="modal-body">
 
-                 <small>
- <table class="table table-bordered">
-  <thead>
-    <tr>
-      <th scope="col">Parcela</th>
-      <th scope="col">Vencimento</th>
-      <th scope="col">Valor</th>
-      <th scope="col">Pago</th>
-      <th scope="col">Ações</th>
-       
-    </tr>
-  </thead>
-  <tbody>
-
                 <?php 
                 if (@$_GET['funcao'] == 'pagamentos') {
 
@@ -361,59 +347,44 @@ if(@$_SESSION['id_usuario'] == null || @$_SESSION['nivel_usuario'] != 'tesoureir
                 
                 ?>
 
-                 <tr>
-      <td scope="row"><?php echo $i2+1 ?></td>
+              
+                       <span><small>
+                             <?php if($atrasado == 'Sim'){ ?>
+                             <span class="text-danger"><i><?php echo $data_venc; 
+                                 $atrasado = 'Não';
+                              ?></i></span>
+                             <?php }else{ ?>
+                                 <span class="text-dark"><i><?php echo $data_venc ?></i></span>
+                            <?php } ?>
+                             - 
+                            R$ <?php echo $valor ?> 
+                            Pago: <?php echo $pago ?>
 
-      <td>
-         <?php if($atrasado == 'Sim'){ ?>
-         <span class="text-danger"><?php echo $data_venc; 
-         $atrasado = 'Não';
-         ?></span>
-         <?php }else{ ?>
-        <span class="text-dark"> <?php echo $data_venc ?></span>
-        <?php } ?>
-      </td>
-
-      <td> R$ <?php echo $valor ?> </td>
-
-      <td>
-         <?php if($pago == 'Sim'){ ?>
-            <span class="text-success"> <?php echo $pago ?></span>
-         <?php }else{ ?>
-            <span class="text-danger"><?php echo $pago ?></span>
-        <?php } ?>
-      </td>
-
-      <td>
-
-         <?php if($pago == 'Sim'){ ?>
+                             <?php if($pago == 'Sim'){ ?>
                               <a href="index.php?pag=<?php echo $pag ?>&funcao=baixa&id=<?php echo $id_pgto ?>" class='text-success ml-2' title='Baixa no Pagamento'><i class='fas fa-check'></i></a>
                              <?php 
                              
                          }else{ 
                             ?>
                                 <a href="index.php?pag=<?php echo $pag ?>&funcao=baixa&id=<?php echo $id_pgto ?>" class='text-danger ml-2' title='Baixa no Pagamento'><i class='fas fa-check'></i></a>
-          <?php } ?>
+                            <?php } ?>
 
 
 
-             <?php if($pgto_boleto == 'Sim'){ ?>
+                             <?php if($pgto_boleto == 'Sim'){ ?>
                               <a href="index.php?pag=<?php echo $pag ?>&funcao=upload&id=<?php echo $id_pgto ?>&id_m=<?php echo $id2 ?>" class='text-primary ml-2' title='Carregar Boleto / Carnê'><i class='fas fa-paperclip'></i></a>
 
                               <?php if($arquivo != ''){ ?>
                                  <a href="../img/arquivos/<?php echo $arquivo ?>" class="text-dark ml-2" target="_blank" title="Abrir o Boleto / Carnê">Ver Arquivo</a>   
-            <?php } } ?>
-      </td>
+                             <?php } } ?>
+                            
 
-    </tr>
+                            <br></small></span>
+                       
 
-              
-                                             
- <?php  } } ?>
+                    <?php  } } ?>
                
-  </tbody>
-</table>
-</small>
+
 
         </div>
 

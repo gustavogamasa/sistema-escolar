@@ -44,15 +44,6 @@ $res2->bindValue(":email", $email);
 $res2->bindValue(":senha", $senha);
 $res2->execute();
 
-
-$res3 = $pdo->prepare("UPDATE alunos SET nome = :nome, cpf = :cpf, email = :email WHERE cpf = '$antigo'");	
-$res3->bindValue(":nome", $nome);
-$res3->bindValue(":cpf", $cpf);
-$res3->bindValue(":email", $email);
-
-$res2->execute();
-$res3->execute();
-
 echo 'Salvo com Sucesso!';
 
 ?>
