@@ -1,23 +1,24 @@
-# Olá! 👋
+# Olá! 👋 Eu sou o Gustavo (RA 1942346-5)
 
-### Seja bem-vindo ao meu TCC 
+### Seja bem-vindo ao meu TCC do curso BACHARELADO EM ENGENHARIA DE SOFTWARE
 
-
-#### Soon to be a graduated Software Engineer (last year!!!)
-
-
-
-#### Technologies I currently use:
+# Sistema EDUque
+#### Sistema de gestão escolar para escolas de idioma
 
 
-- JavaScript, ReactJS, NodeJS, Scala, PHP
+
+#### Tecnologias usadas:
+
+
+- PHP, Ajax, SQL
+- Framework Bootstrap
   
 
 <br>
 
-![Gustavo's GitHub stats](https://github-readme-stats.vercel.app/api?username=gustavogamasa&show_icons=true&theme=tokyonight)
 
-## Find me on:
+
+## Também estou aqui:
 
 [![instagram](https://img.shields.io/badge/Instagram-E4405F?style=for-the-badge&logo=instagram&logoColor=white)](https://www.instagram.com/gu.gama/)
 [![facebook](https://img.shields.io/badge/Facebook-1877F2?style=for-the-badge&logo=facebook&logoColor=white
