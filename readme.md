@@ -1,9 +1,10 @@
-# Olá! 👋 Eu sou o Gustavo (RA 1942346-5)
+# Olá! 👋 Eu sou o Gustavo
+(RA 1942346-5)
 
-### Seja bem-vindo ao meu TCC do curso BACHARELADO EM ENGENHARIA DE SOFTWARE
+## Seja bem-vindo ao meu TCC do curso BACHARELADO EM ENGENHARIA DE SOFTWARE
 
 # Sistema EDUque
-#### Sistema de gestão escolar para escolas de idioma
+## Sistema de gestão escolar para escolas de idioma
 
 
 
