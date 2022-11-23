@@ -14,6 +14,7 @@ if($nome == ""){
 
 
 //VERIFICAR SE O REGISTRO JÁ EXISTE NO BANCO
+
 if($antigo != $nome){
 	$query = $pdo->query("SELECT * FROM disciplinas where nome = '$nome' ");
 	$res = $query->fetchAll(PDO::FETCH_ASSOC);
@@ -24,25 +25,19 @@ if($antigo != $nome){
 	}
 }
 
-
+//INSERIR OU ATUALIZAR DISCIPLINA
 
 if($id == ""){
 	$res = $pdo->prepare("INSERT INTO disciplinas SET nome = :nome");	
 
-
 }else{
 	$res = $pdo->prepare("UPDATE disciplinas SET nome = :nome WHERE id = '$id'");
-
-	
-	
 }
 
 $res->bindValue(":nome", $nome);
-
-
 $res->execute();
-
-
 echo 'Salvo com Sucesso!';
+
+
 
 ?>

@@ -28,7 +28,7 @@ $total_vencimento_dia = number_format($total_vencimento_dia, 2, ',', '.');
 
 
 
-$query = $pdo->query("SELECT * FROM pgto_matriculas where data_venc > curDate() and pago != 'Sim'");
+$query = $pdo->query("SELECT * FROM pgto_matriculas where data_venc < curDate() and pago != 'Sim'");
 $res = $query->fetchAll(PDO::FETCH_ASSOC);
 $mensalidadesVenc = @count($res);
 
@@ -157,7 +157,7 @@ for ($i=0; $i < @count($res); $i++) {
 			<div class="card-body">
 				<div class="row no-gutters align-items-center">
 					<div class="col mr-2">
-						<div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Mensalid Vencendo Hoje</div>
+						<div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Mensalidades Vencendo Hoje</div>
 						<div class="h5 mb-0 font-weight-bold text-gray-800">R$ <?php echo @$mensalidadesVencHoje ?></div>
 					</div>
 					<div class="col-auto">
@@ -200,7 +200,7 @@ for ($i=0; $i < @count($res); $i++) {
 			<div class="card-body">
 				<div class="row no-gutters align-items-center">
 					<div class="col mr-2">
-						<div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Mensalid Pagas Hoje</div>
+						<div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Mensalidades Pagas Hoje</div>
 						<div class="h5 mb-0 font-weight-bold text-gray-800"><?php echo @$totalPagoHoje ?> </div>
 					</div>
 					<div class="col-auto" align="center">
@@ -218,7 +218,7 @@ for ($i=0; $i < @count($res); $i++) {
 			<div class="card-body">
 				<div class="row no-gutters align-items-center">
 					<div class="col mr-2">
-						<div class="text-xs font-weight-bold text-success text-uppercase mb-1">Mensalid Pagas Hoje R$</div>
+						<div class="text-xs font-weight-bold text-success text-uppercase mb-1">Mensalidades Pagas Hoje R$</div>
 						<div class="h5 mb-0 font-weight-bold text-gray-800">R$ <?php echo @$totalPagoHojeR ?> </div>
 					</div>
 					<div class="col-auto" align="center">

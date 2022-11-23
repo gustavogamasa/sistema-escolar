@@ -139,35 +139,7 @@ $idUsuario = @$res[0]['id'];
                 <!-- Divider -->
                 <hr class="sidebar-divider d-none d-md-block">
 
-               
-
-                  <!-- Nav Item - Charts -->
-                <li class="nav-item">
-                    <a class="nav-link" href="index.php?pag=<?php echo $menu6 ?>">
-                        <i class="fas fa-fw fa-chart-area"></i>
-                        <span>Movimentações</span></a>
-                </li>
-
-                <hr class="sidebar-divider d-none d-md-block">
-
-
-
-                 <!-- Nav Item - Utilities Collapse Menu -->
-                <li class="nav-item">
-                    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities2" aria-expanded="true" aria-controls="collapseUtilities">
-                        <i class="fas fa-calendar"></i>
-                        <span>Relatórios</span>
-                    </a>
-                    <div id="collapseUtilities2" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
-                        <div class="bg-white py-2 collapse-inner rounded">
-                           
-                            <a class="collapse-item" href="" data-toggle="modal" data-target="#ModalRelMov">Movimentações</a>
-                            <a class="collapse-item" href="" data-toggle="modal" data-target="#ModalRelPagar">Contas à Pagar</a>
-                           <a class="collapse-item" href="" data-toggle="modal" data-target="#ModalRelInad">Inadimplência</a>
-                           
-                        </div>
-                    </div>
-                </li>
+            
 
 
                 <!-- Sidebar Toggler (Sidebar) -->

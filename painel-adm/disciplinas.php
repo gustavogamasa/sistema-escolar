@@ -206,6 +206,7 @@ if(@$_SESSION['id_usuario'] == null || @$_SESSION['nivel_usuario'] != 'Admin'){
 
 
                 <!--AJAX PARA INSERÇÃO E EDIÇÃO DOS DADOS COM IMAGEM -->
+                
                 <script type="text/javascript">
                     $("#form").submit(function () {
                         var pag = "<?=$pag?>";
@@ -223,8 +224,6 @@ if(@$_SESSION['id_usuario'] == null || @$_SESSION['nivel_usuario'] != 'Admin'){
 
                                 if (mensagem.trim() == "Salvo com Sucesso!") {
 
-                    //$('#nome').val('');
-                    //$('#cpf').val('');
                     $('#btn-fechar').click();
                     window.location = "index.php?pag="+pag;
 
