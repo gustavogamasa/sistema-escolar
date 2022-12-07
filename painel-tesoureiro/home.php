@@ -39,7 +39,7 @@ $mensalidadesVencHoje = @count($res);
 
 
 
-$query = $pdo->query("SELECT * FROM pgto_matriculas where data_venc > curDate() and pago != 'Sim'");
+$query = $pdo->query("SELECT * FROM pgto_matriculas where data_venc < curDate() and pago != 'Sim'");
 $res = $query->fetchAll(PDO::FETCH_ASSOC);
 $total_vencimento_mat = 0;
 for ($i=0; $i < @count($res); $i++) { 
@@ -183,7 +183,7 @@ for ($i=0; $i < @count($res); $i++) {
 			<div class="card-body">
 				<div class="row no-gutters align-items-center">
 					<div class="col mr-2">
-						<div class="text-xs font-weight-bold text-info text-uppercase mb-1">Mensalidades Venc R$</div>
+						<div class="text-xs font-weight-bold text-info text-uppercase mb-1">Mensalidades a vencer R$</div>
 						<div class="h5 mb-0 font-weight-bold text-gray-800">R$ <?php echo @$total_vencimento_mat ?></div>
 					</div>
 					<div class="col-auto">

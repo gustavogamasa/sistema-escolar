@@ -90,6 +90,8 @@ $total_vencimento_dia = number_format($total_vencimento_dia, 2, ',', '.');
 
 
 
+
+
 $query = $pdo->query("SELECT * FROM alunos");
 $res = $query->fetchAll(PDO::FETCH_ASSOC);
 $alunosCadastrados = @count($res);
